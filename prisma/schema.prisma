@@ -1,0 +1,40 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  binaryTargets   = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_PRISMA_URL")
+}
+
+model WeaponRoll {
+  itemInstanceId      String   @id @map("item_instance_id")
+  destinyMembershipId BigInt   @map("destiny_membership_id")
+  weaponHash          BigInt   @map("weapon_hash")
+  createdAt           DateTime @default(now())
+  barrel1             BigInt   @map("barrel_1")
+  barrel2             BigInt?  @map("barrel_2")
+  magazine1           BigInt   @map("magazine_1")
+  magazine2           BigInt?  @map("magazine_2")
+  leftTrait1          BigInt   @map("left_trait_1")
+  leftTrait2          BigInt?  @map("left_trait_2")
+  leftTrait3          BigInt?  @map("left_trait_3")
+  rightTrait1         BigInt   @map("right_trait_1")
+  rightTrait2         BigInt?  @map("right_trait_2")
+  rightTrait3         BigInt?  @map("right_trait_3")
+  masterwork          String?   @map("masterwork")
+
+  @@index([destinyMembershipId])
+  @@index([weaponHash])
+  @@index([createdAt(Desc)])
+  @@map("weapon_rolls")
+}
+
+model ActiveHashes {
+  weaponHash  BigInt @id @map("weapon_hash")
+  displayName String @map("display_name")
+
+  @@map("active_hashes")
+}
