@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DestinyItemCard, SyncState } from "./ItemsDisplay";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { trpc } from "../trpc/client";
+import { trpc } from "@/lib/trpc/client";
 
 export function Main(props: {
   destinyMembershipId: string;

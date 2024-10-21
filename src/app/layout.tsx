@@ -1,9 +1,9 @@
 import "./globals.css";
 import { BungieSessionProvider } from "next-bungie-auth/client";
 import { getServerSession } from "./api/auth";
-import { TRPCProvider } from "./trpc/client";
-import { Header } from "../components/Header";
-import { HydrateClient, trpc } from "./trpc/server";
+import { TRPCProvider } from "@/lib/trpc/client";
+import { HydrateClient, trpc } from "@/lib/trpc/server";
+import { Header } from "@/components/Header";
 
 export const metadata = {
   title: "D2 Loot Tracker",

@@ -8,10 +8,11 @@ export const useInventoryItemDefinitions = () => {
   const { data: manifest } = useManifestSuspended();
 
   return useSuspenseQuery({
-    queryKey: ["DestinyInventoryItemLiteDefinition", manifest.version],
+    queryKey: ["DestinyInventoryItemDefinition", manifest.version],
+    staleTime: Infinity,
     queryFn: () =>
       getDestinyManifestComponent(client, {
-        destinyManifest: manifest!,
+        destinyManifest: manifest,
         tableName: "DestinyInventoryItemDefinition",
         language: "en",
       }),
