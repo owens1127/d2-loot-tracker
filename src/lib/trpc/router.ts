@@ -27,9 +27,9 @@ type PerkCount = {
 };
 
 export const appRouter = createTRPCRouter({
-  activeHashes: baseProcedure.query(({ ctx }) =>
-    ctx.prisma.activeHash.findMany()
-  ),
+  activeHashes: baseProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.activeHash.findMany();
+  }),
 
   commonRolls: baseProcedure.query(async ({ ctx }) => {
     const rolls = await ctx.prisma.weaponRoll.groupBy({
@@ -189,8 +189,8 @@ export const appRouter = createTRPCRouter({
         ),
       })
     )
-    .mutation(async ({ ctx, input }) =>
-      ctx.prisma.weaponRoll.createManyAndReturn({
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.weaponRoll.createManyAndReturn({
         data: input.items.map((item) => ({
           weaponHash: item.itemHash,
           destinyMembershipId: input.destinyMembershipId,
@@ -207,8 +207,8 @@ export const appRouter = createTRPCRouter({
           rightTrait2: item.rightPerks[1],
           rightTrait3: item.rightPerks[2],
         })),
-      })
-    ),
+      });
+    }),
 
   myRecentRolls: authenticatedProcedure
     .input(
@@ -216,13 +216,13 @@ export const appRouter = createTRPCRouter({
         destinyMembershipId: z.string(),
       })
     )
-    .query(({ ctx, input }) =>
-      ctx.prisma.weaponRoll.findMany({
+    .query(async ({ ctx, input }) => {
+      return await ctx.prisma.weaponRoll.findMany({
         where: { destinyMembershipId: input.destinyMembershipId },
         orderBy: { createdAt: "desc" },
         take: 15,
-      })
-    ),
+      });
+    }),
 
   topPlayers: baseProcedure
     .input(
@@ -246,10 +246,11 @@ export const appRouter = createTRPCRouter({
         },
       });
 
+      const basePosition = 1 + (input.page - 1) * input.limit;
       let rank = 0;
       let prevScore = -1;
       return data.map((row, idx) => {
-        const position = idx + 1;
+        const position = idx + basePosition;
         if (row._count.itemInstanceId !== prevScore) {
           prevScore = row._count.itemInstanceId;
           rank = position;
@@ -263,12 +264,12 @@ export const appRouter = createTRPCRouter({
       });
     }),
 
-  allRecentRolls: baseProcedure.query(async ({ ctx }) =>
-    ctx.prisma.weaponRoll.findMany({
+  allRecentRolls: baseProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.weaponRoll.findMany({
       orderBy: { createdAt: "desc" },
       take: 48,
-    })
-  ),
+    });
+  }),
 });
 // export type definition of API
 export type AppRouter = typeof appRouter;

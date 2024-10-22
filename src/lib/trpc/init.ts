@@ -3,6 +3,7 @@ import { cache } from "react";
 import { getRefreshedServerSession } from "@/app/api/auth";
 import { prisma } from "@/lib/prisma";
 import SuperJSON from "superjson";
+import { headers } from "next/headers";
 
 export const createTRPCContext = cache(async () => {
   return {
@@ -22,10 +23,40 @@ const t = initTRPC
      */
     transformer: SuperJSON,
   });
-// Base router and procedure helpers
+
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
-export const baseProcedure = t.procedure;
+
+export const baseProcedure = t.procedure.use(async ({ ctx, next }) => {
+  const res = await next({ ctx });
+
+  if (!res.ok) {
+    try {
+      await fetch(process.env.DISCORD_WEBHOOK_URL!, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content:
+            "```json\n" +
+            JSON.stringify(
+              {
+                error: res.error,
+                errorCause: res.error.cause,
+                headers: Array.from(headers()),
+              },
+              null,
+              2
+            ) +
+            "```",
+        }),
+      });
+    } catch {}
+  }
+
+  return res;
+});
 
 export const authenticatedProcedure = baseProcedure.use(
   async ({ ctx, next }) => {
