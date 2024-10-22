@@ -75,6 +75,7 @@ export const useInventoryScrape = (params: {
     const updatedAt = new Date(
       profileItemsResponse.responseMintedTimestamp
     ).getTime();
+    console.debug("Inventory updating at", updatedAt);
 
     // Clear cache if it's been 30 minutes since last update
     if (updatedAt - prevItems.current.lastUpdated > 30 * 60_000) {
@@ -82,6 +83,7 @@ export const useInventoryScrape = (params: {
         lastUpdated: updatedAt,
         itemIds: null,
       };
+      console.log("Clearing session cache");
       return;
     }
 
@@ -94,6 +96,7 @@ export const useInventoryScrape = (params: {
 
     if (oldItemIds) {
       const differentItemIds = newItemsIds.difference(oldItemIds);
+      console.log("Different item ids", differentItemIds);
 
       const relevantNewItems = Array.from(differentItemIds)
         .map((itemInstanceId) => allItems.get(itemInstanceId)!)
@@ -131,6 +134,7 @@ export const useInventoryScrape = (params: {
 
       // Only add new items if there are any
       if (relevantNewItems.length > 0) {
+        console.log("Adding new items", relevantNewItems);
         addRolls({
           destinyMembershipId: params.destinyMembershipId,
           items: relevantNewItems,

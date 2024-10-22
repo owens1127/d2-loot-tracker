@@ -41,3 +41,6 @@ certificates
 *.env
 
 volumes
+
+db.sqlite
+db.sqlite-journal

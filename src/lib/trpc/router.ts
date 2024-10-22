@@ -193,7 +193,6 @@ export const appRouter = createTRPCRouter({
           rightTrait2: item.rightPerks[1],
           rightTrait3: item.rightPerks[2],
         })),
-        skipDuplicates: true,
       })
     ),
 

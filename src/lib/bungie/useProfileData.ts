@@ -22,11 +22,13 @@ export const useProfileItems = (
       if (!opts.isEnabled) return false;
       if (!state.data?.responseMintedTimestamp) return 60_000;
 
+      const responseMintedTimestamp = new Date(
+        state.data.responseMintedTimestamp
+      );
+
       return Math.max(
         30_000,
-        new Date(state.data.responseMintedTimestamp).getTime() +
-          60_000 -
-          Date.now()
+        responseMintedTimestamp.getTime() + 60_000 - Date.now()
       );
     },
     queryFn: () =>

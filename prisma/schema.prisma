@@ -1,13 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["typedSql"]
+  previewFeatures = ["driverAdapters", "typedSql"]
   binaryTargets   = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-  provider  = "postgres"
-  url       = env("DATABASE_PRISMA_URL")
-  directUrl = env("DATABASE_URL_NON_POOLING")
+  provider  = "sqlite"
+  url       = "file:./db.sqlite"
 }
 
 model WeaponRoll {
