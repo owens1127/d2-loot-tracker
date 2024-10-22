@@ -125,10 +125,24 @@ export const useInventoryScrape = (params: {
               ?.plug?.plugCategoryIdentifier.split(
                 "v400.plugs.weapons.masterworks.stat."
               )[1],
-            barrels: plugs.get("1")!.map((plug) => plug.plugItemHash),
-            magazines: plugs.get("2")!.map((plug) => plug.plugItemHash),
-            leftPerks: plugs.get("3")!.map((plug) => plug.plugItemHash),
-            rightPerks: plugs.get("4")!.map((plug) => plug.plugItemHash),
+            barrels: plugs.get("1")!.map((plug) => plug.plugItemHash) as [
+              number,
+              number,
+              ...number[],
+            ],
+            magazines: plugs.get("2")!.map((plug) => plug.plugItemHash) as [
+              number,
+              number,
+              ...number[],
+            ],
+            leftPerks: plugs.get("3")!.map((plug) => plug.plugItemHash) as [
+              number,
+              ...number[],
+            ],
+            rightPerks: plugs.get("4")!.map((plug) => plug.plugItemHash) as [
+              number,
+              ...number[],
+            ],
           };
         });
 

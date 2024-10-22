@@ -5,15 +5,15 @@ generator client {
 }
 
 datasource db {
-  provider  = "sqlite"
-  url       = "file:./db.sqlite"
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
 }
 
 model WeaponRoll {
   itemInstanceId      String   @id @map("item_instance_id")
   destinyMembershipId String   @map("destiny_membership_id")
   weaponHash          String   @map("weapon_hash")
-  createdAt           DateTime @default(now())
+  createdAt           DateTime @default(now()) @map("created_at")
   barrel1             String   @map("barrel_1")
   barrel2             String?  @map("barrel_2")
   magazine1           String   @map("magazine_1")

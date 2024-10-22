@@ -31,7 +31,7 @@ export const appRouter = createTRPCRouter({
     ctx.prisma.activeHash.findMany()
   ),
 
-  commonPerkRolls: baseProcedure.query(async ({ ctx }) => {
+  commonRolls: baseProcedure.query(async ({ ctx }) => {
     const rolls = await ctx.prisma.weaponRoll.groupBy({
       _count: {
         weaponHash: true,
@@ -86,7 +86,7 @@ export const appRouter = createTRPCRouter({
     return reduced;
   }),
 
-  weaponStats: baseProcedure.query(async ({ ctx }) => {
+  perkStats: baseProcedure.query(async ({ ctx }) => {
     const results = await ctx.prisma
       .$queryRawTyped(perkCountsForActiveWeapons())
       .then((r) => zPerkCountsForActiveWeapons.parse(r));
@@ -164,12 +164,26 @@ export const appRouter = createTRPCRouter({
         destinyMembershipId: z.string(),
         items: z.array(
           z.object({
-            itemHash: z.union([z.string(), z.number()]),
+            itemHash: z.union([z.string(), z.number()]).transform(String),
             itemInstanceId: z.string(),
-            barrels: z.array(z.union([z.string(), z.number()])),
-            magazines: z.array(z.union([z.string(), z.number()])),
-            leftPerks: z.array(z.union([z.string(), z.number()])),
-            rightPerks: z.array(z.union([z.string(), z.number()])),
+            barrels: z
+              .tuple([
+                z.union([z.string(), z.number()]).transform(String),
+                z.union([z.string(), z.number()]).transform(String),
+              ])
+              .rest(z.union([z.string(), z.number()]).transform(String)),
+            magazines: z
+              .tuple([
+                z.union([z.string(), z.number()]).transform(String),
+                z.union([z.string(), z.number()]).transform(String),
+              ])
+              .rest(z.union([z.string(), z.number()]).transform(String)),
+            leftPerks: z
+              .tuple([z.union([z.string(), z.number()]).transform(String)])
+              .rest(z.union([z.string(), z.number()]).transform(String)),
+            rightPerks: z
+              .tuple([z.union([z.string(), z.number()]).transform(String)])
+              .rest(z.union([z.string(), z.number()]).transform(String)),
             masterwork: z.string().optional(),
           })
         ),
@@ -178,20 +192,20 @@ export const appRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) =>
       ctx.prisma.weaponRoll.createManyAndReturn({
         data: input.items.map((item) => ({
-          weaponHash: String(item.itemHash),
+          weaponHash: item.itemHash,
           destinyMembershipId: input.destinyMembershipId,
           itemInstanceId: item.itemInstanceId,
           masterwork: item.masterwork,
-          barrel1: String(item.barrels[0]),
-          barrel2: String(item.barrels[1]),
-          magazine1: String(item.magazines[0]),
-          magazine2: String(item.magazines[1]),
-          leftTrait1: String(item.leftPerks[0]),
-          leftTrait2: String(item.leftPerks[1]),
-          leftTrait3: String(item.leftPerks[2]),
-          rightTrait1: String(item.rightPerks[0]),
-          rightTrait2: String(item.rightPerks[1]),
-          rightTrait3: String(item.rightPerks[2]),
+          barrel1: item.barrels[0],
+          barrel2: item.barrels[1],
+          magazine1: item.magazines[0],
+          magazine2: item.magazines[1],
+          leftTrait1: item.leftPerks[0],
+          leftTrait2: item.leftPerks[1],
+          leftTrait3: item.leftPerks[2],
+          rightTrait1: item.rightPerks[0],
+          rightTrait2: item.rightPerks[1],
+          rightTrait3: item.rightPerks[2],
         })),
       })
     ),

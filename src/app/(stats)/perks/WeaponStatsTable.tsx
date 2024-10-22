@@ -25,7 +25,7 @@ const categories = [
 
 export default function WeaponStatsTable() {
   useManifest();
-  const [weaponStats] = trpc.weaponStats.useSuspenseQuery(undefined, {
+  const [weaponStats] = trpc.perkStats.useSuspenseQuery(undefined, {
     staleTime: Infinity,
   });
 
@@ -134,7 +134,7 @@ const Cell = (props: {
       data-hash={props.perk}
       className={`${getBackgroundColor()} text-foreground p-2 rounded-md text-sm flex items-center space-x-2 border border-border`}
     >
-      {props.category !== "masterworks" ? (
+      {props.category !== "masterworks" && inventoryItems[props.perk] ? (
         <>
           <div className="relative w-10 h-10 flex-shrink-0">
             <Image
