@@ -210,7 +210,7 @@ export const appRouter = createTRPCRouter({
       })
     ),
 
-  recentRolls: authenticatedProcedure
+  myRecentRolls: authenticatedProcedure
     .input(
       z.object({
         destinyMembershipId: z.string(),
@@ -223,6 +223,52 @@ export const appRouter = createTRPCRouter({
         take: 15,
       })
     ),
+
+  topPlayers: baseProcedure
+    .input(
+      z.object({
+        page: z.number().int().positive().default(1),
+        limit: z.number().int().positive().default(25),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const data = await ctx.prisma.weaponRoll.groupBy({
+        by: "destinyMembershipId",
+        _count: {
+          itemInstanceId: true,
+        },
+        skip: (input.page - 1) * input.limit,
+        take: input.limit,
+        orderBy: {
+          _count: {
+            itemInstanceId: "desc",
+          },
+        },
+      });
+
+      let rank = 0;
+      let prevScore = -1;
+      return data.map((row, idx) => {
+        const position = idx + 1;
+        if (row._count.itemInstanceId !== prevScore) {
+          prevScore = row._count.itemInstanceId;
+          rank = position;
+        }
+        return {
+          position,
+          rank,
+          destinyMembershipId: row.destinyMembershipId,
+          count: row._count.itemInstanceId,
+        };
+      });
+    }),
+
+  allRecentRolls: baseProcedure.query(async ({ ctx }) =>
+    ctx.prisma.weaponRoll.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 48,
+    })
+  ),
 });
 // export type definition of API
 export type AppRouter = typeof appRouter;

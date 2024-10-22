@@ -1,7 +1,7 @@
 import { BungieMembershipType } from "bungie-net-core/models";
 import { useInventoryScrape } from "@/app/inventory/useInventoryScrape";
 import { useState } from "react";
-import { DestinyItemCard, SyncState } from "./ItemsDisplay";
+import { DestinyItemCard } from "../../components/ItemsDisplay";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc/client";
@@ -11,7 +11,7 @@ export function Main(props: {
   membershipType: BungieMembershipType;
 }) {
   const [isEnabled, setIsEnabled] = useState(false);
-  const recentRollsQuery = trpc.recentRolls.useQuery({
+  const recentRollsQuery = trpc.myRecentRolls.useQuery({
     destinyMembershipId: props.destinyMembershipId,
   });
   const activeHashesQuery = trpc.activeHashes.useQuery();
@@ -88,11 +88,7 @@ export function Main(props: {
           </h2>
           <div className="flex flex-wrap gap-4">
             {latestUpload.map((item) => (
-              <DestinyItemCard
-                key={item.itemInstanceId}
-                {...item}
-                syncState={SyncState.Uploaded}
-              />
+              <DestinyItemCard key={item.itemInstanceId} {...item} />
             ))}
           </div>
         </section>
@@ -115,11 +111,7 @@ export function Main(props: {
               </h2>
               <div className="flex flex-wrap gap-4">
                 {recentRollsQuery.data.map((item) => (
-                  <DestinyItemCard
-                    key={item.itemInstanceId}
-                    {...item}
-                    syncState={SyncState.Historic}
-                  />
+                  <DestinyItemCard key={item.itemInstanceId} {...item} />
                 ))}
               </div>
             </section>
@@ -134,11 +126,7 @@ export function Main(props: {
               </h2>
               <div className="flex flex-wrap gap-4">
                 {thisSessionItems.map((item) => (
-                  <DestinyItemCard
-                    key={item.itemInstanceId}
-                    {...item}
-                    syncState={SyncState.Uploaded}
-                  />
+                  <DestinyItemCard key={item.itemInstanceId} {...item} />
                 ))}
               </div>
             </section>

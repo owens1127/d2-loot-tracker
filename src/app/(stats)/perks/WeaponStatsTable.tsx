@@ -25,9 +25,7 @@ const categories = [
 
 export default function WeaponStatsTable() {
   useManifest();
-  const [weaponStats] = trpc.perkStats.useSuspenseQuery(undefined, {
-    staleTime: Infinity,
-  });
+  const [weaponStats] = trpc.perkStats.useSuspenseQuery();
 
   const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
 

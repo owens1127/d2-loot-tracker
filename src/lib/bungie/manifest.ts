@@ -11,7 +11,6 @@ const useManifestOpts = () => {
     queryKey: ["getDestinyManifest"],
     queryFn: () =>
       getDestinyManifest(client).then((response) => response.Response),
-    staleTime: Infinity,
     refetchInterval: 60 * 60_000,
   } as const;
 };

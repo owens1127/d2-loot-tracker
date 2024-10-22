@@ -9,15 +9,12 @@ import {
 } from "@/components/ui/tooltip";
 import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
 import { WeaponRoll } from "@prisma/client";
-
-export enum SyncState {
-  Uploaded,
-  Historic,
-}
+import { useResolvePlayer } from "@/lib/useResolvePlayer";
 
 export function DestinyItemCard({
   itemInstanceId,
   createdAt,
+  destinyMembershipId,
   weaponHash,
   masterwork,
   barrel1,
@@ -30,9 +27,8 @@ export function DestinyItemCard({
   rightTrait1,
   rightTrait2,
   rightTrait3,
-}: WeaponRoll & {
-  syncState: SyncState;
-}) {
+}: WeaponRoll) {
+  const { data: player } = useResolvePlayer(destinyMembershipId);
   const { data: defs } = useInventoryItemDefinitionsSuspended();
   const def = defs[Number(weaponHash)];
 
@@ -74,6 +70,9 @@ export function DestinyItemCard({
         <CardTitle className="text-zinc-100">
           {def.displayProperties.name}
         </CardTitle>
+        <p className="text-sm text-zinc-400">
+          ID: <span className="text-zinc-200">{itemInstanceId}</span>
+        </p>
       </CardHeader>
       <CardContent className="pt-4 space-y-4">
         <div className="flex items-center space-x-4">
@@ -87,14 +86,20 @@ export function DestinyItemCard({
           />
           <div className="flex flex-col space-y-1">
             <p className="text-sm text-zinc-400">
-              ID: <span className="text-zinc-200">{itemInstanceId}</span>
-            </p>
-            <p className="text-sm text-zinc-400">
               Uploaded:{" "}
               <span className="text-zinc-200">
                 {createdAt.toLocaleString()}
               </span>
             </p>
+            {player && (
+              <p className="text-sm text-zinc-400">
+                Owner:{" "}
+                <span className="text-zinc-200">
+                  {player.bungieGlobalDisplayName}#
+                  {player.bungieGlobalDisplayNameCode}
+                </span>
+              </p>
+            )}
           </div>
           {masterwork && (
             <p className="text-sm text-zinc-400">

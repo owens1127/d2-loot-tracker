@@ -4,6 +4,7 @@ import { getServerSession } from "./api/auth";
 import { TRPCProvider } from "@/lib/trpc/client";
 import { HydrateClient, trpc } from "@/lib/trpc/server";
 import { Header } from "@/components/Header";
+import { BungieClientProvider } from "@/lib/bungie/client";
 
 export const metadata = {
   title: "D2 Loot Tracker",
@@ -27,14 +28,16 @@ export default function RootLayout({
           deauthorizePath="/api/auth/deauthorize"
           initialSession={session}
         >
-          <TRPCProvider>
-            <HydrateClient>
-              <div className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col">
-                <Header />
-                {children}
-              </div>
-            </HydrateClient>
-          </TRPCProvider>
+          <BungieClientProvider>
+            <TRPCProvider>
+              <HydrateClient>
+                <div className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col">
+                  <Header />
+                  {children}
+                </div>
+              </HydrateClient>
+            </TRPCProvider>
+          </BungieClientProvider>
         </BungieSessionProvider>
       </body>
     </html>

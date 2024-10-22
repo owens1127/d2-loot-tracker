@@ -16,9 +16,7 @@ import Image from "next/image";
 
 export default function WeaponRollsTable() {
   const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
-  const [commonPerkRolls] = trpc.commonRolls.useSuspenseQuery(undefined, {
-    staleTime: Infinity,
-  });
+  const [commonPerkRolls] = trpc.commonRolls.useSuspenseQuery();
 
   return (
     <div className="space-y-8 bg-gray-900 text-white p-4 rounded-md max-w-3xl mx-auto">

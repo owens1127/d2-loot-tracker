@@ -33,14 +33,12 @@ export const useInventoryScrape = (params: {
   );
   const { data: inventoryItemDefinitions } =
     useInventoryItemDefinitionsSuspended();
-  const [activeHashes] = trpc.activeHashes.useSuspenseQuery(undefined, {
-    staleTime: Infinity,
-  });
+  const [activeHashes] = trpc.activeHashes.useSuspenseQuery();
 
   const trpcUtils = trpc.useUtils();
   const { mutate: addRolls, data: latestUpload } = trpc.addRolls.useMutation({
     onSuccess: (data) => {
-      trpcUtils.recentRolls.invalidate();
+      trpcUtils.myRecentRolls.invalidate();
       setThisSessionItems((prev) => [...data, ...prev]);
     },
   });
