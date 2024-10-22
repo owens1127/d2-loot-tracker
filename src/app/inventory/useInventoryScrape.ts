@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { trpc } from "@/lib/trpc/client";
 import { WeaponRoll } from "@prisma/client";
 import { useProfileItems } from "@/lib/bungie/useProfileData";
-import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
+import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
 
 export const useInventoryScrape = (params: {
   destinyMembershipId: string;
@@ -31,7 +31,8 @@ export const useInventoryScrape = (params: {
       isEnabled: params.isEnabled,
     }
   );
-  const { data: inventoryItemDefinitions } = useInventoryItemDefinitions();
+  const { data: inventoryItemDefinitions } =
+    useInventoryItemDefinitionsSuspended();
   const [activeHashes] = trpc.activeHashes.useSuspenseQuery(undefined, {
     staleTime: Infinity,
   });

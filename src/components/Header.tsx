@@ -26,6 +26,18 @@ export const Header = () => {
             >
               Inventory
             </Link>
+            <Link
+              href="/perks"
+              className="text-zinc-100 hover:text-zinc-300 font-medium transition duration-150 ease-in-out"
+            >
+              Perks
+            </Link>
+            <Link
+              href="/rolls"
+              className="text-zinc-100 hover:text-zinc-300 font-medium transition duration-150 ease-in-out"
+            >
+              Rolls
+            </Link>
           </nav>
           {session.status === "authorized" ? (
             <Button

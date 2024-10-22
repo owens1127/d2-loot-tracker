@@ -8,6 +8,7 @@ export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
+        retry: 2,
         staleTime: 30 * 1000,
         refetchIntervalInBackground: true,
         refetchOnReconnect: true,

@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
+  previewFeatures = ["typedSql"]
   binaryTargets   = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -26,15 +26,18 @@ model WeaponRoll {
   rightTrait3         BigInt?  @map("right_trait_3")
   masterwork          String?   @map("masterwork")
 
+  activeHash          ActiveHash? @relation(fields: [weaponHash], references: [weaponHash]) 
+
   @@index([destinyMembershipId])
   @@index([weaponHash])
   @@index([createdAt(Desc)])
   @@map("weapon_rolls")
 }
 
-model ActiveHashes {
+model ActiveHash {
   weaponHash  BigInt @id @map("weapon_hash")
   displayName String @map("display_name")
+  weaponRolls WeaponRoll[]
 
   @@map("active_hashes")
 }
