@@ -11,19 +11,19 @@ datasource db {
 
 model WeaponRoll {
   itemInstanceId      String   @id @map("item_instance_id")
-  destinyMembershipId BigInt   @map("destiny_membership_id")
-  weaponHash          BigInt   @map("weapon_hash")
+  destinyMembershipId String   @map("destiny_membership_id")
+  weaponHash          String   @map("weapon_hash")
   createdAt           DateTime @default(now())
-  barrel1             BigInt   @map("barrel_1")
-  barrel2             BigInt?  @map("barrel_2")
-  magazine1           BigInt   @map("magazine_1")
-  magazine2           BigInt?  @map("magazine_2")
-  leftTrait1          BigInt   @map("left_trait_1")
-  leftTrait2          BigInt?  @map("left_trait_2")
-  leftTrait3          BigInt?  @map("left_trait_3")
-  rightTrait1         BigInt   @map("right_trait_1")
-  rightTrait2         BigInt?  @map("right_trait_2")
-  rightTrait3         BigInt?  @map("right_trait_3")
+  barrel1             String   @map("barrel_1")
+  barrel2             String?  @map("barrel_2")
+  magazine1           String   @map("magazine_1")
+  magazine2           String?  @map("magazine_2")
+  leftTrait1          String   @map("left_trait_1")
+  leftTrait2          String?  @map("left_trait_2")
+  leftTrait3          String?  @map("left_trait_3")
+  rightTrait1         String   @map("right_trait_1")
+  rightTrait2         String?  @map("right_trait_2")
+  rightTrait3         String?  @map("right_trait_3")
   masterwork          String?  @map("masterwork")
 
   activeHash ActiveHash? @relation(fields: [weaponHash], references: [weaponHash])
@@ -35,7 +35,7 @@ model WeaponRoll {
 }
 
 model ActiveHash {
-  weaponHash  BigInt       @id @map("weapon_hash")
+  weaponHash  String       @id @map("weapon_hash")
   displayName String       @map("display_name")
   weaponRolls WeaponRoll[]
 

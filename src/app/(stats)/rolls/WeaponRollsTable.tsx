@@ -86,7 +86,7 @@ export default function WeaponRollsTable() {
   );
 }
 
-const Cell = (props: { perk: number }) => {
+const Cell = (props: { perk: string }) => {
   const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
 
   return (

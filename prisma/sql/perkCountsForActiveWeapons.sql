@@ -69,7 +69,7 @@ masterworks AS (
         CAST(masterwork AS TEXT) AS perk, 
         'masterwork' AS column, 
         COUNT(*) AS count
-    FROM weps
+    FROM weps WHERE masterwork IS NOT NULL
     GROUP BY weapon_hash, masterwork
 )
 SELECT * FROM (
