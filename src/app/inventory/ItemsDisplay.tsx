@@ -107,22 +107,22 @@ export function DestinyItemCard({
 
         <div className="grid grid-cols-4 gap-4">
           {renderPerkColumn(
-            [barrel1, barrel2].filter((h): h is bigint => !!h).map(Number),
+            [barrel1, barrel2].filter((h): h is string => !!h).map(Number),
             "Barrels"
           )}
           {renderPerkColumn(
-            [magazine1, magazine2].filter((h): h is bigint => !!h).map(Number),
+            [magazine1, magazine2].filter((h): h is string => !!h).map(Number),
             "Magazines"
           )}
           {renderPerkColumn(
             [leftTrait1, leftTrait2, leftTrait3]
-              .filter((h): h is bigint => !!h)
+              .filter((h): h is string => !!h)
               .map(Number),
             "Left Perks"
           )}
           {renderPerkColumn(
             [rightTrait1, rightTrait2, rightTrait3]
-              .filter((h): h is bigint => !!h)
+              .filter((h): h is string => !!h)
               .map(Number),
             "Right Perks"
           )}
