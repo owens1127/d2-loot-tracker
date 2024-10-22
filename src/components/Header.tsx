@@ -38,6 +38,12 @@ export const Header = () => {
             >
               Rolls
             </Link>
+            <Link
+              href="/players"
+              className="text-zinc-100 hover:text-zinc-300 font-medium transition duration-150 ease-in-out"
+            >
+              Players
+            </Link>
           </nav>
           {session.status === "authorized" ? (
             <Button

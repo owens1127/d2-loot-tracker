@@ -9,7 +9,6 @@ const useInventoryItemDefinitionsOptions = () => {
 
   return {
     queryKey: ["DestinyInventoryItemDefinition", manifest.version],
-    staleTime: Infinity,
     queryFn: () =>
       getDestinyManifestComponent(client, {
         destinyManifest: manifest,

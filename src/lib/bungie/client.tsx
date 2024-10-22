@@ -1,7 +1,7 @@
 "use client";
 
 import { BungieClientProtocol } from "bungie-net-core";
-import { useAuthorizedBungieSession } from "next-bungie-auth/client";
+import { useBungieSession } from "next-bungie-auth/client";
 import { createContext, useCallback, useContext } from "react";
 
 export const BungieClientContext = createContext<
@@ -13,7 +13,7 @@ export const BungieClientProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const session = useAuthorizedBungieSession();
+  const session = useBungieSession();
 
   const http = useCallback<BungieClientProtocol["fetch"]>(
     async (config) => {
@@ -33,10 +33,12 @@ export const BungieClientProvider = ({
       if (config.url.pathname.match(/\/Platform\//)) {
         payload.headers.set("X-API-KEY", apiKey);
 
-        payload.headers.set(
-          "Authorization",
-          `Bearer ${session.data.accessToken}`
-        );
+        if (session.data && "accessToken" in session.data) {
+          payload.headers.set(
+            "Authorization",
+            `Bearer ${session.data.accessToken}`
+          );
+        }
       }
 
       const res = await fetch(config.url, payload);
@@ -84,7 +86,7 @@ export const BungieClientProvider = ({
 
       return JSON.parse(text);
     },
-    [session]
+    [session.data]
   );
 
   return (
