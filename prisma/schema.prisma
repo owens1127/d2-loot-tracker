@@ -7,7 +7,7 @@ generator client {
 datasource db {
   provider  = "postgres"
   url       = env("DATABASE_PRISMA_URL")
-  directUrl = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_NON_POOLING")
 }
 
 model WeaponRoll {
