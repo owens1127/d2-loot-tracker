@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
+import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
 import { WeaponRoll } from "@prisma/client";
 
 export enum SyncState {
@@ -33,7 +33,7 @@ export function DestinyItemCard({
 }: WeaponRoll & {
   syncState: SyncState;
 }) {
-  const { data: defs } = useInventoryItemDefinitions();
+  const { data: defs } = useInventoryItemDefinitionsSuspended();
   const def = defs[Number(weaponHash)];
 
   const renderPerkColumn = (perks: number[], label: string) => (

@@ -1,46 +1,42 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getProfile } from "bungie-net-core/endpoints/Destiny2";
 import {
   BungieMembershipType,
   DestinyItemComponent,
 } from "bungie-net-core/models";
-import { useBungieClient } from "../../lib/bungie/client";
-import { useInventoryItemDefinitions } from "../../lib/bungie/useInventoryItemDefinitions";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { trpc } from "@/app/trpc/client";
+import { trpc } from "@/lib/trpc/client";
 import { WeaponRoll } from "@prisma/client";
+import { useProfileItems } from "@/lib/bungie/useProfileData";
+import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
 
 export const useInventoryScrape = (params: {
   destinyMembershipId: string;
   membershipType: BungieMembershipType;
   isEnabled: boolean;
 }) => {
-  const client = useBungieClient();
-  const inventoryQuery = useSuspenseQuery({
-    queryKey: ["profile", params],
-    refetchOnWindowFocus: true,
-    refetchIntervalInBackground: params.isEnabled,
-    refetchInterval: 60_000,
-    queryFn: () =>
-      getProfile(client, {
-        ...params,
-        components: [102, 201, 310, 305],
-      }).then((response) => response.Response),
-  });
-
-  const [activeHashes] = trpc.activeHashes.useSuspenseQuery(undefined, {
-    refetchInterval: 30 * 60_000,
-  });
-  const { data: inventoryItemDefinitions } = useInventoryItemDefinitions();
-
+  const [thisSessionItems, setThisSessionItems] = useState<WeaponRoll[]>([]);
   const prevItems = useRef<{
     lastUpdated: number;
-    items: Set<string> | null;
+    itemIds: Set<string> | null;
   }>({
     lastUpdated: Date.now(),
-    items: null,
+    itemIds: null,
   });
-  const [thisSessionItems, setThisSessionItems] = useState<WeaponRoll[]>([]);
+
+  const { data: profileItemsResponse } = useProfileItems(
+    {
+      destinyMembershipId: params.destinyMembershipId,
+      membershipType: params.membershipType,
+    },
+    {
+      isEnabled: params.isEnabled,
+    }
+  );
+  const { data: inventoryItemDefinitions } =
+    useInventoryItemDefinitionsSuspended();
+  const [activeHashes] = trpc.activeHashes.useSuspenseQuery(undefined, {
+    staleTime: Infinity,
+  });
+
   const trpcUtils = trpc.useUtils();
   const { mutate: addRolls, data: latestUpload } = trpc.addRolls.useMutation({
     onSuccess: (data) => {
@@ -49,55 +45,72 @@ export const useInventoryScrape = (params: {
     },
   });
 
-  const items = useMemo(() => {
-    const activeHashesSet = new Set(
-      activeHashes.map((hash) => Number(hash.weaponHash))
-    );
+  const allItems = useMemo(() => {
     const items: DestinyItemComponent[] = [];
-    if (inventoryQuery.data?.profileInventory.data?.items) {
-      items.push(...inventoryQuery.data.profileInventory.data.items);
+    if (profileItemsResponse.profileInventory.data?.items) {
+      items.push(...profileItemsResponse.profileInventory.data.items);
     }
-    Object.values(inventoryQuery.data?.characterInventories.data ?? {}).forEach(
+    Object.values(profileItemsResponse.characterInventories.data ?? {}).forEach(
       (component) => {
         items.push(...component.items);
       }
     );
 
-    return items.filter((item) => activeHashesSet.has(item.itemHash));
-  }, [inventoryQuery.data, activeHashes]);
+    return new Map(
+      items
+        .filter((item) => item.itemInstanceId!)
+        .map((item) => [item.itemInstanceId!, item])
+    );
+  }, [profileItemsResponse]);
 
+  // Reset cache when membership changes or activeHashes changes
   useEffect(() => {
     prevItems.current = {
       lastUpdated: Date.now(),
-      items: null,
+      itemIds: null,
     };
   }, [params.destinyMembershipId]);
 
   useEffect(() => {
+    const updatedAt = new Date(
+      profileItemsResponse.responseMintedTimestamp
+    ).getTime();
+
     // Clear cache if it's been 30 minutes since last update
-    if (Date.now() - prevItems.current.lastUpdated > 30 * 60_000) {
+    if (updatedAt - prevItems.current.lastUpdated > 30 * 60_000) {
       prevItems.current = {
-        lastUpdated: Date.now(),
-        items: null,
+        lastUpdated: updatedAt,
+        itemIds: null,
       };
       return;
     }
 
-    const formattedItems = new Map(
-      items.map((item) => {
-        const plugs = new Map(
-          Object.entries(
-            inventoryQuery.data?.itemComponents.reusablePlugs.data?.[
-              item.itemInstanceId!
-            ].plugs ?? {}
-          )
-        );
+    const activeHashesSet = new Set(
+      activeHashes.map((hash) => Number(hash.weaponHash))
+    );
 
-        return [
-          item.itemInstanceId!,
-          {
-            item,
-            masterwork: inventoryQuery.data?.itemComponents.sockets.data?.[
+    const oldItemIds = prevItems.current.itemIds;
+    const newItemsIds = new Set(allItems.keys());
+
+    if (oldItemIds) {
+      const differentItemIds = newItemsIds.difference(oldItemIds);
+
+      const relevantNewItems = Array.from(differentItemIds)
+        .map((itemInstanceId) => allItems.get(itemInstanceId)!)
+        .filter((item) => activeHashesSet.has(item.itemHash))
+        .map((item) => {
+          const plugs = new Map(
+            Object.entries(
+              profileItemsResponse.itemComponents.reusablePlugs.data?.[
+                item.itemInstanceId!
+              ].plugs ?? {}
+            )
+          );
+
+          return {
+            itemInstanceId: item.itemInstanceId!,
+            itemHash: item.itemHash,
+            masterwork: profileItemsResponse.itemComponents.sockets.data?.[
               item.itemInstanceId!
             ].sockets
               .map((s) => inventoryItemDefinitions[s.plugHash!])
@@ -113,47 +126,31 @@ export const useInventoryScrape = (params: {
             magazines: plugs.get("2")!.map((plug) => plug.plugItemHash),
             leftPerks: plugs.get("3")!.map((plug) => plug.plugItemHash),
             rightPerks: plugs.get("4")!.map((plug) => plug.plugItemHash),
-          },
-        ];
-      })
-    );
-
-    const oldItems = prevItems.current.items;
-    const newItems = new Set(formattedItems.keys());
-    if (oldItems) {
-      const diff = newItems.difference(oldItems);
-
-      if (diff.size === 0) {
-        return;
-      }
-
-      addRolls({
-        destinyMembershipId: params.destinyMembershipId,
-        items: Array.from(diff).map((itemInstanceId) => {
-          const item = formattedItems.get(itemInstanceId)!;
-          return {
-            itemHash: item.item.itemHash,
-            itemInstanceId: itemInstanceId,
-            barrels: item.barrels,
-            magazines: item.magazines,
-            leftPerks: item.leftPerks,
-            rightPerks: item.rightPerks,
-            masterwork: item.masterwork,
           };
-        }),
-      });
+        });
+
+      // Only add new items if there are any
+      if (relevantNewItems.length > 0) {
+        addRolls({
+          destinyMembershipId: params.destinyMembershipId,
+          items: relevantNewItems,
+        });
+      }
     }
+
     prevItems.current = {
-      lastUpdated: Date.now(),
-      items: newItems,
+      lastUpdated: updatedAt,
+      itemIds: newItemsIds,
     };
   }, [
     addRolls,
     inventoryItemDefinitions,
-    inventoryQuery.data?.itemComponents.reusablePlugs.data,
-    inventoryQuery.data?.itemComponents.sockets.data,
-    items,
+    profileItemsResponse.responseMintedTimestamp,
+    profileItemsResponse.itemComponents.reusablePlugs.data,
+    profileItemsResponse.itemComponents.sockets.data,
+    allItems,
     params.destinyMembershipId,
+    activeHashes,
   ]);
 
   return { latestUpload, thisSessionItems };

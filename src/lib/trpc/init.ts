@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import { cache } from "react";
-import { getRefreshedServerSession } from "../api/auth";
-import { prisma } from "../prisma";
+import { getRefreshedServerSession } from "@/app/api/auth";
+import { prisma } from "@/lib/prisma";
 import SuperJSON from "superjson";
 
 export const createTRPCContext = cache(async () => {
@@ -47,5 +47,5 @@ export const authenticatedProcedure = baseProcedure.use(
           message: sessionResponse.message,
         });
     }
-  },
+  }
 );

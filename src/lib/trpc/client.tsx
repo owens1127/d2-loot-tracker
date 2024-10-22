@@ -1,4 +1,5 @@
-"use client"; // <-- to make sure we can mount the Provider from a server component
+"use client";
+
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { httpLink, loggerLink } from "@trpc/client";
@@ -26,6 +27,7 @@ function getUrl() {
   })();
   return `${base}/api/trpc`;
 }
+
 export function TRPCProvider(
   props: Readonly<{
     children: React.ReactNode;

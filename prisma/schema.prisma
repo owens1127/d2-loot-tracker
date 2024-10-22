@@ -1,12 +1,13 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
+  previewFeatures = ["typedSql"]
   binaryTargets   = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_PRISMA_URL")
+  provider  = "postgres"
+  url       = env("DATABASE_PRISMA_URL")
+  directUrl = env("DATABASE_URL_NON_POOLING")
 }
 
 model WeaponRoll {
@@ -24,7 +25,9 @@ model WeaponRoll {
   rightTrait1         BigInt   @map("right_trait_1")
   rightTrait2         BigInt?  @map("right_trait_2")
   rightTrait3         BigInt?  @map("right_trait_3")
-  masterwork          String?   @map("masterwork")
+  masterwork          String?  @map("masterwork")
+
+  activeHash ActiveHash? @relation(fields: [weaponHash], references: [weaponHash])
 
   @@index([destinyMembershipId])
   @@index([weaponHash])
@@ -32,9 +35,10 @@ model WeaponRoll {
   @@map("weapon_rolls")
 }
 
-model ActiveHashes {
-  weaponHash  BigInt @id @map("weapon_hash")
-  displayName String @map("display_name")
+model ActiveHash {
+  weaponHash  BigInt       @id @map("weapon_hash")
+  displayName String       @map("display_name")
+  weaponRolls WeaponRoll[]
 
   @@map("active_hashes")
 }
