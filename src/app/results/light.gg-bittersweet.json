@@ -1,0 +1,1570 @@
+[
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 31397,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 31397,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 31397,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 31397,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 19344,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 19344,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 19344,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 19344,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 18560,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 18560,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 18560,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 18560,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 17200,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 17200,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 17200,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 17200,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 16464,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 16464,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 16464,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 16464,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 12748,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 12748,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 12748,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 12748,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 11068,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 11068,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 11068,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 11068,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 10437,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 10437,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 10437,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 10437,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 9843,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 9843,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 9843,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 9843,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 8328,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 8328,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 8328,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 8328,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 8278,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 8278,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 8278,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 8278,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 7929,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 7929,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 7929,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 7929,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 7285,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 7285,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 7285,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 7285,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 7055,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 7055,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 7055,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 7055,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 7037,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 7037,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 7037,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 7037,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 6935,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 6935,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 6935,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 6935,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 6871,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 6871,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 6871,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 6871,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 6818,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 6818,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 6818,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 6818,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 6705,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 6705,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 6705,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 6705,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 6481,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 6481,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 6481,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 6481,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 6230,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 6230,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 6230,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 6230,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 5554,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 5554,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 5554,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 5554,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 5551,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 5551,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 5551,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 5551,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 5542,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 5542,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 5542,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 5542,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 5518,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 5518,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 5518,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 5518,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 5383,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 5383,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 5383,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 5383,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 4930,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 4930,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 4930,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 4930,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 4911,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 4911,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 4911,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 4911,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 4690,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 4690,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 4690,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 4690,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 4633,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 4633,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 4633,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 4633,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 3732,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 3732,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 3732,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 3732,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 3513,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 3513,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 3513,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 3513,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 3435,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 3435,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 3435,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 3435,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 3030,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 3030,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 3030,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 3030,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 2866,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 2866,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 2866,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 2866,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 2603,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 2603,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 2603,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 2603,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 2596,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 2596,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 2596,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 2596,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 2509,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 2509,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 2509,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 2509,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 2360,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 2360,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 2360,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 2360,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 2280,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 2280,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3966416502,
+    "Perk5EnhancedHash": 717070634,
+    "Count": 2280,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 717070634,
+    "Perk5EnhancedHash": null,
+    "Count": 2280,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 2236,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 2236,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3744057135,
+    "Perk5EnhancedHash": null,
+    "Count": 2236,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3078487919,
+    "Perk5EnhancedHash": 3744057135,
+    "Count": 2236,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 1816,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 1816,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 2896748467,
+    "Perk5EnhancedHash": null,
+    "Count": 1816,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 557221067,
+    "Perk5EnhancedHash": 2896748467,
+    "Count": 1816,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 1771,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 1771,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 2817499044,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 1771,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3987942396,
+    "Perk4EnhancedHash": 2817499044,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 1771,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 1494,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 438098033,
+    "Perk5EnhancedHash": 2748801589,
+    "Count": 1494,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 563069569,
+    "Perk4EnhancedHash": 2167611941,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 1494,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2167611941,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2748801589,
+    "Perk5EnhancedHash": null,
+    "Count": 1494,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 1482,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 1482,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 984655331,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 1482,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 243981275,
+    "Perk4EnhancedHash": 984655331,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 1482,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 1476,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 1476,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 3108830275,
+    "Perk4EnhancedHash": 855168139,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 1476,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 855168139,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 1476,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 1462,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 3194351027,
+    "Perk5EnhancedHash": 2275087323,
+    "Count": 1462,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 561986700,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 1462,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1119449540,
+    "Perk4EnhancedHash": 561986700,
+    "Perk5Hash": 2275087323,
+    "Perk5EnhancedHash": null,
+    "Count": 1462,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 1408,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 4104185692,
+    "Perk5EnhancedHash": 3007133316,
+    "Count": 1408,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1583705720,
+    "Perk4EnhancedHash": 1409206216,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 1408,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1409206216,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3007133316,
+    "Perk5EnhancedHash": null,
+    "Count": 1408,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 1352,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 2014892510,
+    "Perk4EnhancedHash": null,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 1352,
+    "Show": false
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 3751912585,
+    "Perk5EnhancedHash": 331667533,
+    "Count": 1352,
+    "Show": true
+  },
+  {
+    "Perk4Hash": 1428297954,
+    "Perk4EnhancedHash": 2014892510,
+    "Perk5Hash": 331667533,
+    "Perk5EnhancedHash": null,
+    "Count": 1352,
+    "Show": false
+  }
+]
