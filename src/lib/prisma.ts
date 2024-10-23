@@ -6,7 +6,7 @@ import { createClient } from "@libsql/client";
 
 const prismaClientSingleton = () => {
   return new PrismaClient({
-    adapter: !process.env.VERCEL_ENV
+    adapter: process.env.VERCEL_ENV
       ? new PrismaLibSQL(
           createClient({
             url: `${process.env.TURSO_DATABASE_URL}`,
