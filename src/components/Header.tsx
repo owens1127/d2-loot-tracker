@@ -44,6 +44,12 @@ export const Header = () => {
             >
               Players
             </Link>
+            <Link
+              href="/results"
+              className="text-zinc-100 hover:text-zinc-300 font-medium transition duration-150 ease-in-out"
+            >
+              Results
+            </Link>
           </nav>
           {session.status === "authorized" ? (
             <Button
