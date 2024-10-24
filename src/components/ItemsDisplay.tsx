@@ -7,9 +7,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
+import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
 import { WeaponRoll } from "@prisma/client";
 import { useResolvePlayer } from "@/lib/useResolvePlayer";
+import { Skeleton } from "./ui/skeleton";
 
 export function DestinyItemCard({
   itemInstanceId,
@@ -29,8 +30,12 @@ export function DestinyItemCard({
   rightTrait3,
 }: WeaponRoll) {
   const { data: player } = useResolvePlayer(destinyMembershipId);
-  const { data: defs } = useInventoryItemDefinitionsSuspended();
-  const def = defs[Number(weaponHash)];
+  const { data: defs } = useInventoryItemDefinitions();
+  const def = defs?.[Number(weaponHash)];
+
+  if (!def) {
+    return <Skeleton className="w-full max-w-md h-64 bg-zinc-500" />;
+  }
 
   const renderPerkColumn = (perks: number[], label: string) => (
     <div className="flex flex-col items-center space-y-2">

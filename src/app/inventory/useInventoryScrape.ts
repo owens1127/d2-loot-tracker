@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { trpc } from "@/lib/trpc/client";
 import { WeaponRoll } from "@prisma/client";
 import { useProfileItems } from "@/lib/bungie/useProfileData";
-import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
+import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
 
 export const useInventoryScrape = (params: {
   destinyMembershipId: string;
@@ -31,8 +31,7 @@ export const useInventoryScrape = (params: {
       isEnabled: params.isEnabled,
     }
   );
-  const { data: inventoryItemDefinitions } =
-    useInventoryItemDefinitionsSuspended();
+  const { data: inventoryItemDefinitions } = useInventoryItemDefinitions();
   const [activeHashes] = trpc.activeHashes.useSuspenseQuery();
 
   const trpcUtils = trpc.useUtils();
@@ -49,6 +48,11 @@ export const useInventoryScrape = (params: {
       items.push(...profileItemsResponse.profileInventory.data.items);
     }
     Object.values(profileItemsResponse.characterInventories.data ?? {}).forEach(
+      (component) => {
+        items.push(...component.items);
+      }
+    );
+    Object.values(profileItemsResponse.characterEquipment.data ?? {}).forEach(
       (component) => {
         items.push(...component.items);
       }
@@ -70,6 +74,8 @@ export const useInventoryScrape = (params: {
   }, [params.destinyMembershipId]);
 
   useEffect(() => {
+    if (!inventoryItemDefinitions) return;
+
     const updatedAt = new Date(
       profileItemsResponse.responseMintedTimestamp
     ).getTime();

@@ -2,8 +2,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
 import RecentRolls from "./RecentRolls";
+import { trpc } from "@/lib/trpc/server";
+
+export const dynamic = "force-static";
 
 export default function Home() {
+  void trpc.allRecentRolls.prefetch();
+
   return (
     <main className="flex-grow flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8 text-center">

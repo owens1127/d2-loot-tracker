@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useInventoryItemDefinitionsSuspended } from "@/lib/bungie/useInventoryItemDefinitions";
+import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
 import Image from "next/image";
 import { useMemo } from "react";
 import { useSocketsForWeapon } from "@/lib/bungie/useSocketsForWeapon";
@@ -24,13 +24,13 @@ export default function WeaponRollsCard(weapon: {
   }[];
 }) {
   const [leftPerks, rightPerks] = useSocketsForWeapon(weapon.weaponHash);
-  const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
+  const { data: inventoryItems } = useInventoryItemDefinitions();
 
   const perkGrid = useMemo(() => {
     const gridRolls = leftPerks.map((leftPerk) => ({
-      perk: leftPerk,
+      leftPerk,
       columns: rightPerks.map((rightPerk) => ({
-        perk: rightPerk,
+        rightPerk,
         count:
           weapon.rolls.find(
             (r) =>
@@ -40,13 +40,12 @@ export default function WeaponRollsCard(weapon: {
       })),
     }));
 
+    const totalRolls = weapon.rolls.reduce((acc, curr) => acc + curr.count, 0);
     return {
-      totalRolls: weapon.rolls.length,
+      totalRolls,
       expected:
-        gridRolls.reduce(
-          (acc, curr) => acc + curr.columns.reduce((a, c) => a + c.count, 0),
-          0
-        ) / Math.max(1, gridRolls.length * (gridRolls[0]?.columns.length ?? 0)),
+        totalRolls /
+        Math.max(1, gridRolls.length * (gridRolls[0]?.columns.length ?? 0)),
       weaponHash: weapon.weaponHash,
       topRowPerks: rightPerks,
       gridRolls,
@@ -57,22 +56,25 @@ export default function WeaponRollsCard(weapon: {
     <Card className="bg-gray-800 text-white">
       <CardHeader>
         <CardTitle>
-          <div
-            data-hash={weapon.weaponHash}
-            className="flex items-center space-x-4"
-          >
-            <Image
-              src={`https://www.bungie.net${inventoryItems[weapon.weaponHash].displayProperties.icon}`}
-              alt={inventoryItems[weapon.weaponHash].displayProperties.name}
-              unoptimized
-              width={72}
-              height={72}
-              className="rounded-md"
-            />
-            <span className="text-lg font-semibold">
-              {inventoryItems[weapon.weaponHash].displayProperties.name}
-            </span>
-          </div>
+          {inventoryItems && (
+            <div
+              data-hash={weapon.weaponHash}
+              className="flex items-center space-x-4"
+            >
+              <Image
+                src={`https://www.bungie.net${inventoryItems[weapon.weaponHash].displayProperties.icon}`}
+                alt={inventoryItems[weapon.weaponHash].displayProperties.name}
+                unoptimized
+                width={72}
+                height={72}
+                className="rounded-md"
+              />
+              <span className="text-lg font-semibold">
+                {inventoryItems[weapon.weaponHash].displayProperties.name}
+              </span>
+              <p>n = {perkGrid.totalRolls}</p>
+            </div>
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -91,12 +93,12 @@ export default function WeaponRollsCard(weapon: {
               </TableHeader>
               <TableBody>
                 {perkGrid.gridRolls.map((row) => (
-                  <TableRow key={row.perk} className="hover:bg-transparent">
+                  <TableRow key={row.leftPerk} className="hover:bg-transparent">
                     <TableCell>
-                      <IconCell perk={row.perk} />
+                      <IconCell perk={row.leftPerk} />
                     </TableCell>
                     {row.columns.map((column) => (
-                      <TableCell key={column.perk}>
+                      <TableCell key={column.rightPerk}>
                         <NumberCell
                           count={column.count}
                           total={perkGrid.totalRolls}
@@ -117,7 +119,11 @@ export default function WeaponRollsCard(weapon: {
 }
 
 const IconCell = (props: { perk: number }) => {
-  const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
+  const { data: inventoryItems } = useInventoryItemDefinitions();
+
+  if (!inventoryItems) {
+    return null;
+  }
 
   return (
     <Image
@@ -136,11 +142,8 @@ const NumberCell = (props: {
   expected: number;
 }) => {
   const ratio = props.count / props.expected; // Calculate the ratio instead of deviation
-
   const shade = Math.min(255, Math.floor(ratio * 127)); // Closer to 2 -> lighter (higher intensity), closer to 0 -> darker (lower intensity)
-
   const backgroundColor = `rgba(${shade}, ${shade}, ${shade}, 1)`; // Full opacity, grayscale shading
-
   const textColor = shade > 127 ? "text-black" : "text-white";
 
   return (

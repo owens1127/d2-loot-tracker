@@ -1,5 +1,5 @@
 import { DestinyItemSocketEntryDefinition } from "bungie-net-core/models";
-import { useInventoryItemDefinitionsSuspended } from "./useInventoryItemDefinitions";
+import { useInventoryItemDefinitions } from "./useInventoryItemDefinitions";
 import { usePlugSetDefinitions } from "./usePlugSetDefinitions";
 
 enum SocketType {
@@ -11,30 +11,25 @@ enum SocketType {
 
 export const useSocketsForWeapon = (weaponHash: number | string) => {
   const { data: plugSetDefinitions } = usePlugSetDefinitions();
-  const { data: inventoryItems } = useInventoryItemDefinitionsSuspended();
+  const { data: inventoryItems } = useInventoryItemDefinitions();
 
   const sockets =
-    inventoryItems[weaponHash].sockets?.socketEntries.filter(
+    inventoryItems?.[weaponHash].sockets?.socketEntries.filter(
       (e) =>
         !!e.randomizedPlugSetHash &&
         (e.socketTypeHash === SocketType.LeftPerk ||
           e.socketTypeHash === SocketType.RightPerk)
     ) ?? [];
 
-  const mapper = (socket: DestinyItemSocketEntryDefinition): number[] =>
-    plugSetDefinitions?.[socket.randomizedPlugSetHash!].reusablePlugItems
-      ?.filter((item) => item.currentlyCanRoll)
-      .map((item) => item.plugItemHash) ?? [];
-
-  const leftPerks =
+  const getPerks = (socektType: SocketType) =>
     sockets
-      .filter((socket) => socket.socketTypeHash === SocketType.LeftPerk)
-      .flatMap(mapper) ?? [];
+      .filter((socket) => socket.socketTypeHash === socektType)
+      .flatMap(
+        (socket: DestinyItemSocketEntryDefinition) =>
+          plugSetDefinitions?.[socket.randomizedPlugSetHash!].reusablePlugItems
+            ?.filter((item) => item.currentlyCanRoll)
+            .map((item) => item.plugItemHash) ?? []
+      );
 
-  const rightPerks =
-    sockets
-      .filter((socket) => socket.socketTypeHash === SocketType.RightPerk)
-      .flatMap(mapper) ?? [];
-
-  return [leftPerks, rightPerks];
+  return [getPerks(SocketType.LeftPerk), getPerks(SocketType.RightPerk)];
 };

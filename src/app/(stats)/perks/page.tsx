@@ -1,11 +1,12 @@
-"use client";
+import { trpcServerSideCaller } from "@/lib/trpc/server";
+import PerkStatsTable from "./PerkStatsTable";
 
-import WeaponStatsTable from "./WeaponStatsTable";
+export default async function Page() {
+  const perkStats = await trpcServerSideCaller.perkStats();
 
-export default function Page() {
   return (
     <main>
-      <WeaponStatsTable />
+      <PerkStatsTable perkStats={perkStats} />
     </main>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 import { BungieMembershipType } from "bungie-net-core/models";
 

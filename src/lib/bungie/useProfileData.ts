@@ -34,7 +34,7 @@ export const useProfileItems = (
     queryFn: () =>
       getProfile(client, {
         ...params,
-        components: [102, 201, 310, 305],
+        components: [102, 201, 205, 310, 305],
       }).then((response) => response.Response),
   });
 };

@@ -2,19 +2,15 @@
 
 import { getDestinyManifest } from "bungie-net-core/endpoints/Destiny2";
 import { useBungieClient } from "./client";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-const useManifestOpts = () => {
+export const useManifest = () => {
   const client = useBungieClient();
 
-  return {
+  return useQuery({
     queryKey: ["getDestinyManifest"],
     queryFn: () =>
       getDestinyManifest(client).then((response) => response.Response),
-    refetchInterval: 60 * 60_000,
-  } as const;
+    refetchInterval: 1000 * 60 * 30,
+  });
 };
-
-export const useManifest = () => useQuery(useManifestOpts());
-
-export const useManifestSuspended = () => useSuspenseQuery(useManifestOpts());

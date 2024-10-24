@@ -1,22 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { useManifestSuspended } from "./manifest";
 import { getDestinyManifestComponent } from "bungie-net-core/manifest";
 import { useBungieClient } from "./client";
+import { useManifest } from "./manifest";
 
-const usePlugSetDefinitionOptions = () => {
+export const usePlugSetDefinitions = () => {
   const client = useBungieClient();
-  const { data: manifest } = useManifestSuspended();
+  const { data: manifest } = useManifest();
 
-  return {
-    queryKey: ["DestinyPlugSetDefinition", manifest.version],
+  return useQuery({
+    queryKey: ["DestinyPlugSetDefinition", manifest?.version ?? "null"],
     queryFn: () =>
       getDestinyManifestComponent(client, {
-        destinyManifest: manifest,
+        destinyManifest: manifest!,
         tableName: "DestinyPlugSetDefinition",
         language: "en",
       }),
-  };
+    enabled: manifest && typeof window !== "undefined",
+  });
 };
-
-export const usePlugSetDefinitions = () =>
-  useQuery(usePlugSetDefinitionOptions());

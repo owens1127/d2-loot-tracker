@@ -1,25 +1,25 @@
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { useManifestSuspended } from "./manifest";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { useManifest } from "./manifest";
 import { getDestinyManifestComponent } from "bungie-net-core/manifest";
 import { useBungieClient } from "./client";
 
 const useInventoryItemDefinitionsOptions = () => {
   const client = useBungieClient();
-  const { data: manifest } = useManifestSuspended();
+  const { data: manifest } = useManifest();
 
   return {
-    queryKey: ["DestinyInventoryItemDefinition", manifest.version],
+    queryKey: ["DestinyInventoryItemDefinition", manifest?.version || "null"],
     queryFn: () =>
       getDestinyManifestComponent(client, {
-        destinyManifest: manifest,
+        destinyManifest: manifest!,
         tableName: "DestinyInventoryItemDefinition",
         language: "en",
       }),
+    enabled: manifest && typeof window !== "undefined",
   };
 };
 
 export const useInventoryItemDefinitions = () =>
   useQuery(useInventoryItemDefinitionsOptions());
-
-export const useInventoryItemDefinitionsSuspended = () =>
-  useSuspenseQuery(useInventoryItemDefinitionsOptions());

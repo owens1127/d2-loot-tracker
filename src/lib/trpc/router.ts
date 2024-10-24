@@ -5,20 +5,25 @@ import {
   createTRPCRouter,
 } from "./init";
 import { perkCountsForActiveWeapons } from "@prisma/client/sql";
+import traitsToEnhanced from "@/lib/bungie/trait-to-enhanced-trait.json";
+
+const enhancedTraits = new Set(Object.values(traitsToEnhanced));
 
 const zPerkCountsForActiveWeapons = z.array(
-  z.object({
-    weaponHash: z.string(),
-    perk: z.string(),
-    column: z.enum([
-      "barrel",
-      "magazine",
-      "left_perk",
-      "right_perk",
-      "masterwork",
-    ]),
-    count: z.bigint(),
-  })
+  z.discriminatedUnion("column", [
+    z.object({
+      weaponHash: z.string(),
+      perk: z.coerce.number(),
+      column: z.enum(["barrel", "magazine", "left_perk", "right_perk"]),
+      count: z.bigint(),
+    }),
+    z.object({
+      weaponHash: z.string(),
+      perk: z.string(),
+      column: z.literal("masterwork"),
+      count: z.bigint(),
+    }),
+  ])
 );
 
 type PerkCount = {
@@ -89,7 +94,14 @@ export const appRouter = createTRPCRouter({
   perkStats: baseProcedure.query(async ({ ctx }) => {
     const results = await ctx.prisma
       .$queryRawTyped(perkCountsForActiveWeapons())
-      .then((r) => zPerkCountsForActiveWeapons.parse(r));
+      .then((r) =>
+        zPerkCountsForActiveWeapons
+          .parse(r)
+          .filter(
+            (row) =>
+              row.column === "masterwork" || !enhancedTraits.has(row.perk)
+          )
+      );
 
     const reduced: {
       weaponHash: string;
@@ -107,7 +119,7 @@ export const appRouter = createTRPCRouter({
 
       if (existingWeapon) {
         existingWeapon[row.column].push({
-          perk: row.perk,
+          perk: String(row.perk),
           count: Number(row.count),
         });
       } else {
@@ -132,27 +144,22 @@ export const appRouter = createTRPCRouter({
       weaponHash: Number(weapon.weaponHash),
       barrels: {
         total: weapon.barrel.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.barrel.length,
         data: weapon.barrel.sort((a, b) => b.count - a.count),
       },
       magazines: {
         total: weapon.magazine.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.magazine.length,
         data: weapon.magazine.sort((a, b) => b.count - a.count),
       },
       leftTraits: {
         total: weapon.left_perk.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.left_perk.length,
         data: weapon.left_perk.sort((a, b) => b.count - a.count),
       },
       rightTraits: {
         total: weapon.right_perk.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.right_perk.length,
         data: weapon.right_perk.sort((a, b) => b.count - a.count),
       },
       masterworks: {
         total: weapon.masterwork.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.masterwork.length,
         data: weapon.masterwork.sort((a, b) => b.count - a.count),
       },
     }));
@@ -224,45 +231,37 @@ export const appRouter = createTRPCRouter({
       });
     }),
 
-  topPlayers: baseProcedure
-    .input(
-      z.object({
-        page: z.number().int().positive().default(1),
-        limit: z.number().int().positive().default(25),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const data = await ctx.prisma.weaponRoll.groupBy({
-        by: "destinyMembershipId",
+  topPlayers: baseProcedure.query(async ({ ctx }) => {
+    const data = await ctx.prisma.weaponRoll.groupBy({
+      by: "destinyMembershipId",
+      _count: {
+        itemInstanceId: true,
+      },
+      take: 200,
+      orderBy: {
         _count: {
-          itemInstanceId: true,
+          itemInstanceId: "desc",
         },
-        skip: (input.page - 1) * input.limit,
-        take: input.limit,
-        orderBy: {
-          _count: {
-            itemInstanceId: "desc",
-          },
-        },
-      });
+      },
+    });
 
-      const basePosition = 1 + (input.page - 1) * input.limit;
-      let rank = 0;
-      let prevScore = -1;
-      return data.map((row, idx) => {
-        const position = idx + basePosition;
-        if (row._count.itemInstanceId !== prevScore) {
-          prevScore = row._count.itemInstanceId;
-          rank = position;
-        }
-        return {
-          position,
-          rank,
-          destinyMembershipId: row.destinyMembershipId,
-          count: row._count.itemInstanceId,
-        };
-      });
-    }),
+    const basePosition = 1;
+    let rank = 0;
+    let prevScore = -1;
+    return data.map((row, idx) => {
+      const position = idx + basePosition;
+      if (row._count.itemInstanceId !== prevScore) {
+        prevScore = row._count.itemInstanceId;
+        rank = position;
+      }
+      return {
+        position,
+        rank,
+        destinyMembershipId: row.destinyMembershipId,
+        count: row._count.itemInstanceId,
+      };
+    });
+  }),
 
   allRecentRolls: baseProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.weaponRoll.findMany({
