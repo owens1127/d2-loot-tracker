@@ -5,6 +5,7 @@ import { TRPCProvider } from "@/lib/trpc/client";
 import { HydrateClient, trpc } from "@/lib/trpc/server";
 import { Header } from "@/components/Header";
 import { BungieClientProvider } from "@/lib/bungie/client";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "D2 Loot Tracker",
@@ -17,6 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = getServerSession();
+  const isStatic = !Array.from(headers()).length;
 
   void trpc.activeHashes.prefetch();
 
@@ -26,7 +28,7 @@ export default function RootLayout({
         <BungieSessionProvider
           sessionPath="/api/auth/session"
           deauthorizePath="/api/auth/deauthorize"
-          initialSession={session}
+          initialSession={isStatic ? undefined : session}
         >
           <BungieClientProvider>
             <TRPCProvider>
