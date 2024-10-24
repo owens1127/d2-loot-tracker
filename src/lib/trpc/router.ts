@@ -267,37 +267,43 @@ export const appRouter = createTRPCRouter({
         limit: z.number().int().positive().default(25),
       })
     )
-    .query(async ({ ctx, input }) => {
-      const data = await ctx.prisma.weaponRoll.groupBy({
-        by: "destinyMembershipId",
-        _count: {
-          itemInstanceId: true,
-        },
-        skip: (input.page - 1) * input.limit,
-        take: input.limit,
-        orderBy: {
-          _count: {
-            itemInstanceId: "desc",
-          },
-        },
-      });
+    .query(async ({}) => {
+      return [] as {
+        position: number;
+        rank: number;
+        destinyMembershipId: string;
+        count: number;
+      }[];
+      // const data = await ctx.prisma.weaponRoll.groupBy({
+      //   by: "destinyMembershipId",
+      //   _count: {
+      //     itemInstanceId: true,
+      //   },
+      //   skip: (input.page - 1) * input.limit,
+      //   take: input.limit,
+      //   orderBy: {
+      //     _count: {
+      //       itemInstanceId: "desc",
+      //     },
+      //   },
+      // });
 
-      const basePosition = 1 + (input.page - 1) * input.limit;
-      let rank = 0;
-      let prevScore = -1;
-      return data.map((row, idx) => {
-        const position = idx + basePosition;
-        if (row._count.itemInstanceId !== prevScore) {
-          prevScore = row._count.itemInstanceId;
-          rank = position;
-        }
-        return {
-          position,
-          rank,
-          destinyMembershipId: row.destinyMembershipId,
-          count: row._count.itemInstanceId,
-        };
-      });
+      // const basePosition = 1 + (input.page - 1) * input.limit;
+      // let rank = 0;
+      // let prevScore = -1;
+      // return data.map((row, idx) => {
+      //   const position = idx + basePosition;
+      //   if (row._count.itemInstanceId !== prevScore) {
+      //     prevScore = row._count.itemInstanceId;
+      //     rank = position;
+      //   }
+      //   return {
+      //     position,
+      //     rank,
+      //     destinyMembershipId: row.destinyMembershipId,
+      //     count: row._count.itemInstanceId,
+      //   };
+      // });
     }),
 
   allRecentRolls: baseProcedure.query(async ({ ctx }) => {
