@@ -46,3 +46,5 @@ db.sqlite
 db.sqlite-journal
 
 backup
+
+dump.sql

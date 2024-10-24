@@ -21,10 +21,22 @@ export const useSocketsForWeapon = (weaponHash: number | string) => {
           e.socketTypeHash === SocketType.RightPerk)
     ) ?? [];
 
-  const mapper = (socket: DestinyItemSocketEntryDefinition): number[] =>
+  const mapper = (socket: DestinyItemSocketEntryDefinition) =>
     plugSetDefinitions?.[socket.randomizedPlugSetHash!].reusablePlugItems
-      ?.filter((item) => item.currentlyCanRoll)
-      .map((item) => item.plugItemHash) ?? [];
+      ?.map((item, idx) => ({
+        currentlyCanRoll: item.currentlyCanRoll,
+        perkItemHash: item.plugItemHash,
+        socketIndex: idx,
+      }))
+      .filter(
+        (
+          item
+        ): item is {
+          currentlyCanRoll: true;
+          perkItemHash: number;
+          socketIndex: number;
+        } => item.currentlyCanRoll
+      ) ?? [];
 
   const leftPerks =
     sockets

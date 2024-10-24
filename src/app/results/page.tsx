@@ -1,26 +1,6 @@
 import { trpcServerSideCaller } from "@/lib/trpc/server";
 import ChiSquareChart from "./ChiSquareChart";
-import lightGGMultimach from "./light.gg-multimach.json";
-import lightGGBittersweet from "./light.gg-bittersweet.json";
-import WeaponRollsCard from "@/components/WeaponRollsCard";
-
-const MultimachData = {
-  weaponHash: "3211624072",
-  rolls: lightGGMultimach.map((r) => ({
-    leftPerk: String(r.Perk4Hash),
-    rightPerk: String(r.Perk5Hash),
-    count: r.Count,
-  })),
-};
-
-const BittersweetData = {
-  weaponHash: "2599338625",
-  rolls: lightGGBittersweet.map((r) => ({
-    leftPerk: String(r.Perk4Hash),
-    rightPerk: String(r.Perk5Hash),
-    count: r.Count,
-  })),
-};
+import NormalDistributionChart from "./NormalDistributionChart";
 
 export default async function Page() {
   const commonPerkRolls = await trpcServerSideCaller.commonRolls();
@@ -31,8 +11,11 @@ export default async function Page() {
           <ChiSquareChart key={weapon.weaponHash} {...weapon} />
         ))}
       </div>
-      <WeaponRollsCard {...BittersweetData} />
-      <WeaponRollsCard {...MultimachData} />
+      <div className="flex flex-col gap-3">
+        {commonPerkRolls.map((weapon) => (
+          <NormalDistributionChart key={weapon.weaponHash} {...weapon} />
+        ))}
+      </div>
     </main>
   );
 }
