@@ -4,22 +4,22 @@ import {
   baseProcedure,
   createTRPCRouter,
 } from "./init";
-import { perkCountsForActiveWeapons } from "@prisma/client/sql";
+// import { perkCountsForActiveWeapons } from "@prisma/client/sql";
 
-const zPerkCountsForActiveWeapons = z.array(
-  z.object({
-    weaponHash: z.string(),
-    perk: z.string(),
-    column: z.enum([
-      "barrel",
-      "magazine",
-      "left_perk",
-      "right_perk",
-      "masterwork",
-    ]),
-    count: z.bigint(),
-  })
-);
+// const zPerkCountsForActiveWeapons = z.array(
+//   z.object({
+//     weaponHash: z.string(),
+//     perk: z.string(),
+//     column: z.enum([
+//       "barrel",
+//       "magazine",
+//       "left_perk",
+//       "right_perk",
+//       "masterwork",
+//     ]),
+//     count: z.bigint(),
+//   })
+// );
 
 type PerkCount = {
   perk: string;
@@ -31,131 +31,167 @@ export const appRouter = createTRPCRouter({
     return await ctx.prisma.activeHash.findMany();
   }),
 
-  commonRolls: baseProcedure.query(async ({ ctx }) => {
-    const rolls = await ctx.prisma.weaponRoll.groupBy({
-      _count: {
-        weaponHash: true,
-      },
-      where: {
-        activeHash: {
-          isNot: null,
-        },
-      },
-      by: ["weaponHash", "leftTrait1", "rightTrait1"],
-      orderBy: {
-        _count: {
-          weaponHash: "desc",
-        },
-      },
-    });
-
-    const reduced: {
+  commonRolls: baseProcedure.query(async ({}) => {
+    return [] as {
       weaponHash: string;
       rolls: {
         leftPerk: string;
         rightPerk: string;
         count: number;
       }[];
-    }[] = [];
+    }[];
+    // const rolls = await ctx.prisma.weaponRoll.groupBy({
+    //   _count: {
+    //     weaponHash: true,
+    //   },
+    //   where: {
+    //     activeHash: {
+    //       isNot: null,
+    //     },
+    //   },
+    //   by: ["weaponHash", "leftTrait1", "rightTrait1"],
+    //   orderBy: {
+    //     _count: {
+    //       weaponHash: "desc",
+    //     },
+    //   },
+    // });
 
-    for (const row of rolls) {
-      const existingWeapon = reduced.find(
-        (w) => w.weaponHash === row.weaponHash
-      );
+    // const reduced: {
+    //   weaponHash: string;
+    //   rolls: {
+    //     leftPerk: string;
+    //     rightPerk: string;
+    //     count: number;
+    //   }[];
+    // }[] = [];
 
-      if (existingWeapon) {
-        existingWeapon.rolls.push({
-          leftPerk: row.leftTrait1,
-          rightPerk: row.rightTrait1,
-          count: row._count.weaponHash,
-        });
-      } else {
-        reduced.push({
-          weaponHash: row.weaponHash,
-          rolls: [
-            {
-              leftPerk: row.leftTrait1,
-              rightPerk: row.rightTrait1,
-              count: row._count.weaponHash,
-            },
-          ],
-        });
-      }
-    }
+    // for (const row of rolls) {
+    //   const existingWeapon = reduced.find(
+    //     (w) => w.weaponHash === row.weaponHash
+    //   );
 
-    return reduced;
+    //   if (existingWeapon) {
+    //     existingWeapon.rolls.push({
+    //       leftPerk: row.leftTrait1,
+    //       rightPerk: row.rightTrait1,
+    //       count: row._count.weaponHash,
+    //     });
+    //   } else {
+    //     reduced.push({
+    //       weaponHash: row.weaponHash,
+    //       rolls: [
+    //         {
+    //           leftPerk: row.leftTrait1,
+    //           rightPerk: row.rightTrait1,
+    //           count: row._count.weaponHash,
+    //         },
+    //       ],
+    //     });
+    //   }
+    // }
+
+    // return reduced;
   }),
 
-  perkStats: baseProcedure.query(async ({ ctx }) => {
-    const results = await ctx.prisma
-      .$queryRawTyped(perkCountsForActiveWeapons())
-      .then((r) => zPerkCountsForActiveWeapons.parse(r));
-
-    const reduced: {
-      weaponHash: string;
-      barrel: PerkCount[];
-      magazine: PerkCount[];
-      left_perk: PerkCount[];
-      right_perk: PerkCount[];
-      masterwork: PerkCount[];
-    }[] = [];
-
-    for (const row of results) {
-      const existingWeapon = reduced.find(
-        (w) => w.weaponHash === row.weaponHash
-      );
-
-      if (existingWeapon) {
-        existingWeapon[row.column].push({
-          perk: row.perk,
-          count: Number(row.count),
-        });
-      } else {
-        reduced.push({
-          weaponHash: row.weaponHash,
-          barrel: [],
-          magazine: [],
-          left_perk: [],
-          right_perk: [],
-          masterwork: [],
-          [row.column]: [
-            {
-              perk: row.perk,
-              count: Number(row.count),
-            },
-          ],
-        });
-      }
-    }
-
-    return reduced.map((weapon) => ({
-      weaponHash: Number(weapon.weaponHash),
+  perkStats: baseProcedure.query(async ({}) => {
+    return [] as {
+      weaponHash: number;
       barrels: {
-        total: weapon.barrel.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.barrel.length,
-        data: weapon.barrel.sort((a, b) => b.count - a.count),
-      },
+        total: number;
+        unique: number;
+        data: PerkCount[];
+      };
       magazines: {
-        total: weapon.magazine.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.magazine.length,
-        data: weapon.magazine.sort((a, b) => b.count - a.count),
-      },
+        total: number;
+        unique: number;
+        data: PerkCount[];
+      };
       leftTraits: {
-        total: weapon.left_perk.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.left_perk.length,
-        data: weapon.left_perk.sort((a, b) => b.count - a.count),
-      },
+        total: number;
+        unique: number;
+        data: PerkCount[];
+      };
       rightTraits: {
-        total: weapon.right_perk.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.right_perk.length,
-        data: weapon.right_perk.sort((a, b) => b.count - a.count),
-      },
+        total: number;
+        unique: number;
+        data: PerkCount[];
+      };
       masterworks: {
-        total: weapon.masterwork.reduce((acc, curr) => acc + curr.count, 0),
-        unique: weapon.masterwork.length,
-        data: weapon.masterwork.sort((a, b) => b.count - a.count),
-      },
-    }));
+        total: number;
+        unique: number;
+        data: PerkCount[];
+      };
+    }[];
+    // const results = await ctx.prisma
+    //   .$queryRawTyped(perkCountsForActiveWeapons())
+    //   .then((r) => zPerkCountsForActiveWeapons.parse(r));
+
+    // const reduced: {
+    //   weaponHash: string;
+    //   barrel: PerkCount[];
+    //   magazine: PerkCount[];
+    //   left_perk: PerkCount[];
+    //   right_perk: PerkCount[];
+    //   masterwork: PerkCount[];
+    // }[] = [];
+
+    // for (const row of results) {
+    //   const existingWeapon = reduced.find(
+    //     (w) => w.weaponHash === row.weaponHash
+    //   );
+
+    //   if (existingWeapon) {
+    //     existingWeapon[row.column].push({
+    //       perk: row.perk,
+    //       count: Number(row.count),
+    //     });
+    //   } else {
+    //     reduced.push({
+    //       weaponHash: row.weaponHash,
+    //       barrel: [],
+    //       magazine: [],
+    //       left_perk: [],
+    //       right_perk: [],
+    //       masterwork: [],
+    //       [row.column]: [
+    //         {
+    //           perk: row.perk,
+    //           count: Number(row.count),
+    //         },
+    //       ],
+    //     });
+    //   }
+    // }
+
+    // return reduced.map((weapon) => ({
+    //   weaponHash: Number(weapon.weaponHash),
+    //   barrels: {
+    //     total: weapon.barrel.reduce((acc, curr) => acc + curr.count, 0),
+    //     unique: weapon.barrel.length,
+    //     data: weapon.barrel.sort((a, b) => b.count - a.count),
+    //   },
+    //   magazines: {
+    //     total: weapon.magazine.reduce((acc, curr) => acc + curr.count, 0),
+    //     unique: weapon.magazine.length,
+    //     data: weapon.magazine.sort((a, b) => b.count - a.count),
+    //   },
+    //   leftTraits: {
+    //     total: weapon.left_perk.reduce((acc, curr) => acc + curr.count, 0),
+    //     unique: weapon.left_perk.length,
+    //     data: weapon.left_perk.sort((a, b) => b.count - a.count),
+    //   },
+    //   rightTraits: {
+    //     total: weapon.right_perk.reduce((acc, curr) => acc + curr.count, 0),
+    //     unique: weapon.right_perk.length,
+    //     data: weapon.right_perk.sort((a, b) => b.count - a.count),
+    //   },
+    //   masterworks: {
+    //     total: weapon.masterwork.reduce((acc, curr) => acc + curr.count, 0),
+    //     unique: weapon.masterwork.length,
+    //     data: weapon.masterwork.sort((a, b) => b.count - a.count),
+    //   },
+    // }));
   }),
 
   addRolls: authenticatedProcedure

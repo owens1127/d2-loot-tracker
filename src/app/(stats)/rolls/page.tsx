@@ -8,6 +8,9 @@ export default function Page() {
 
   return (
     <main>
+      <div className="text-red-500 font-bold mb-5">
+        This page is temporarily disabled for maintenance.
+      </div>
       <div className="space-y-8 bg-gray-900 text-white p-4 rounded-md max-w-3xl mx-auto">
         {commonPerkRolls.map((weapon) => (
           <WeaponRollsCard key={weapon.weaponHash} {...weapon} />
