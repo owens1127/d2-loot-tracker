@@ -2,9 +2,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
 import RecentRolls from "./RecentRolls";
-import { trpc } from "@/lib/trpc/server";
+import { HydrateClient, trpc } from "@/lib/trpc/server";
 
 export const dynamic = "force-static";
+export const revalidate = 30;
 
 export default function Home() {
   void trpc.allRecentRolls.prefetch();
@@ -20,13 +21,15 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <Suspense
-        fallback={
-          <Skeleton className="w-full h-48 bg-zinc-700 rounded-lg mt-4" />
-        }
-      >
-        <RecentRolls />
-      </Suspense>
+      <HydrateClient>
+        <Suspense
+          fallback={
+            <Skeleton className="w-full h-48 bg-zinc-700 rounded-lg mt-4" />
+          }
+        >
+          <RecentRolls />
+        </Suspense>
+      </HydrateClient>
     </main>
   );
 }

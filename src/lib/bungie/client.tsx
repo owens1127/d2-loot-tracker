@@ -47,6 +47,10 @@ export const BungieClientProvider = ({
       const contentType = res.headers.get("Content-Type");
 
       if (!res.ok) {
+        if (res.status === 401 && session.status === "authorized") {
+          session.refresh(true);
+        }
+
         if (contentType?.includes("application/json")) {
           const data = JSON.parse(text);
           if ("ErrorCode" in data && data.ErrorCode !== 1) {
@@ -86,7 +90,7 @@ export const BungieClientProvider = ({
 
       return JSON.parse(text);
     },
-    [session.data]
+    [session]
   );
 
   return (

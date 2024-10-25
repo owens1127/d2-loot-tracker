@@ -16,8 +16,9 @@ export const useProfileItems = (
 
   return useSuspenseQuery({
     queryKey: ["getProfile", params],
-    refetchOnWindowFocus: true,
     refetchIntervalInBackground: opts.isEnabled,
+    refetchOnMount: opts.isEnabled ? "always" : true,
+    refetchOnWindowFocus: opts.isEnabled ? "always" : true,
     refetchInterval: ({ state }) => {
       if (!opts.isEnabled) return false;
       if (!state.data?.responseMintedTimestamp) return 60_000;
