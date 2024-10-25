@@ -1,6 +1,6 @@
 import { BungieMembershipType } from "bungie-net-core/models";
 import { useInventoryScrape } from "@/app/inventory/useInventoryScrape";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { DestinyItemCard } from "../../components/ItemsDisplay";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -25,6 +25,11 @@ export function Main(props: {
   const toggleInventoryScrape = () => {
     setIsEnabled(!isEnabled);
   };
+
+  const orderedRecentItems = useMemo(
+    () => Array.from(thisSessionItems).reverse(),
+    [thisSessionItems]
+  );
 
   return (
     <div className="container mx-auto p-4 space-y-8">
@@ -54,7 +59,7 @@ export function Main(props: {
             </p>
             <p className="text-red-400 mt-2">
               Warning: Do not delete new items from your inventory while the
-              scrape is enabled, this will produce innacurate data.
+              scrape is enabled, this will produce inaccurate data.
             </p>
             <p className="text-red-400 mt-2">
               Leave the scraper on for a minimum of 5 minutes after you have
@@ -119,14 +124,14 @@ export function Main(props: {
         </div>
       ) : (
         <div>
-          {thisSessionItems.length > 0 ? (
+          {orderedRecentItems.length > 0 ? (
             <section>
               <h2 className="text-xl font-semibold text-zinc-200 mb-4">
                 This Session&apos;s Items
               </h2>
               <div className="flex flex-wrap gap-4">
-                {thisSessionItems.map((item) => (
-                  <DestinyItemCard key={item.itemInstanceId} {...item} />
+                {orderedRecentItems.map(([id, item]) => (
+                  <DestinyItemCard key={id} {...item} />
                 ))}
               </div>
             </section>

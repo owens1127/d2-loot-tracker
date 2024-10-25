@@ -7,13 +7,16 @@ import { trpc } from "@/lib/trpc/client";
 import { WeaponRoll } from "@prisma/client";
 import { useProfileItems } from "@/lib/bungie/useProfileData";
 import { useInventoryItemDefinitions } from "@/lib/bungie/useInventoryItemDefinitions";
+import toast from "react-hot-toast";
 
 export const useInventoryScrape = (params: {
   destinyMembershipId: string;
   membershipType: BungieMembershipType;
   isEnabled: boolean;
 }) => {
-  const [thisSessionItems, setThisSessionItems] = useState<WeaponRoll[]>([]);
+  const [thisSessionItems, setThisSessionItems] = useState(
+    new Map<string, WeaponRoll>()
+  );
   const prevItems = useRef<{
     lastUpdated: number;
     itemIds: Set<string> | null;
@@ -36,9 +39,58 @@ export const useInventoryScrape = (params: {
 
   const trpcUtils = trpc.useUtils();
   const { mutate: addRolls, data: latestUpload } = trpc.addRolls.useMutation({
+    retry: 3,
     onSuccess: (data) => {
       trpcUtils.myRecentRolls.invalidate();
-      setThisSessionItems((prev) => [...data, ...prev]);
+      setThisSessionItems((prev) => {
+        const newItems = new Map<string, WeaponRoll>(prev);
+        data
+          .sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          )
+          .forEach((item) => {
+            newItems.set(item.itemInstanceId, item);
+          });
+        return newItems;
+      });
+      if (data.length) {
+        toast.success(
+          `${data.length} new rolls uploaded successfully at ${new Date().toLocaleTimeString()}`,
+          {
+            duration: 10000,
+            style: {
+              background: "#27272a",
+              color: "#fafafa",
+              padding: "16px",
+              borderRadius: "8px",
+              boxShadow:
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+            },
+            iconTheme: {
+              primary: "#22c55e",
+              secondary: "#fafafa",
+            },
+          }
+        );
+      }
+    },
+    onError: (error) => {
+      toast.error(`Error uploading rolls: ${error.message}`, {
+        duration: 10000,
+        style: {
+          background: "#27272a", // zinc-800
+          color: "#fafafa", // zinc-50
+          padding: "16px",
+          borderRadius: "8px",
+          boxShadow:
+            "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        },
+        iconTheme: {
+          primary: "#ef4444", // red-500
+          secondary: "#fafafa", // zinc-50
+        },
+      });
     },
   });
 
@@ -79,7 +131,7 @@ export const useInventoryScrape = (params: {
     const updatedAt = new Date(
       profileItemsResponse.responseMintedTimestamp
     ).getTime();
-    console.debug("Inventory updating at", updatedAt);
+    console.log("Inventory updating at", new Date(updatedAt).toTimeString());
 
     // Clear cache if it's been 30 minutes since last update
     if (updatedAt - prevItems.current.lastUpdated > 30 * 60_000) {

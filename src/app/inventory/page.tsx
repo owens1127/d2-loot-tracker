@@ -6,6 +6,7 @@ import { Main } from "./Main";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useManifest } from "@/lib/bungie/manifest";
+import { Toaster } from "react-hot-toast";
 
 const membershipTypeMap = {
   [-1]: "All",
@@ -30,6 +31,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-zinc-900 text-zinc-50 p-4 sm:p-6 lg:p-8">
+      <Toaster position="bottom-right" />
       <Tabs
         defaultValue={applicableMemberships[0].membershipId}
         className="w-full"

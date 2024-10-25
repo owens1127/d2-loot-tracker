@@ -58,11 +58,10 @@ export const Header = () => {
           ) : (
             <Button
               className="bg-zinc-600 hover:bg-zinc-700 text-zinc-100 font-semibold py-2 px-4 rounded-md transition duration-150 ease-in-out"
-              asChild
               disabled={session.status === "pending"}
             >
               <a
-                href="/api/auth/authorize"
+                href={session.status === "pending" ? "/" : "/api/auth/bungie"}
                 className={
                   session.status === "pending"
                     ? "opacity-50 cursor-not-allowed"

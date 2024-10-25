@@ -4,7 +4,7 @@ import {
   baseProcedure,
   createTRPCRouter,
 } from "./init";
-import { perkCountsForActiveWeapons } from "@prisma/client/sql";
+import { perkCountsForActiveWeapons, insertRoll } from "@prisma/client/sql";
 import traitsToEnhanced from "@/lib/bungie/trait-to-enhanced-trait.json";
 
 const enhancedTraits = new Set(Object.values(traitsToEnhanced));
@@ -197,24 +197,47 @@ export const appRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.weaponRoll.createManyAndReturn({
-        data: input.items.map((item) => ({
-          weaponHash: item.itemHash,
-          destinyMembershipId: input.destinyMembershipId,
-          itemInstanceId: item.itemInstanceId,
-          masterwork: item.masterwork,
-          barrel1: item.barrels[0],
-          barrel2: item.barrels[1],
-          magazine1: item.magazines[0],
-          magazine2: item.magazines[1],
-          leftTrait1: item.leftPerks[0],
-          leftTrait2: item.leftPerks[1],
-          leftTrait3: item.leftPerks[2],
-          rightTrait1: item.rightPerks[0],
-          rightTrait2: item.rightPerks[1],
-          rightTrait3: item.rightPerks[2],
-        })),
-      });
+      // Prisma does not support avoiding duplicates on insertMany
+      const result = await ctx.prisma.$transaction(
+        input.items.map((item) =>
+          ctx.prisma.$queryRawTyped(
+            insertRoll(
+              item.itemHash,
+              input.destinyMembershipId,
+              item.itemInstanceId,
+              item.barrels[0],
+              item.barrels[1],
+              item.magazines[0],
+              item.magazines[1],
+              item.leftPerks[0],
+              item.leftPerks[1],
+              item.leftPerks[2],
+              item.rightPerks[0],
+              item.rightPerks[1],
+              item.rightPerks[2],
+              item.masterwork
+            )
+          )
+        )
+      );
+
+      return result.flat().map((r) => ({
+        itemInstanceId: r.item_instance_id,
+        destinyMembershipId: r.destiny_membership_id,
+        weaponHash: r.weapon_hash,
+        barrel1: r.barrel_1,
+        barrel2: r.barrel_2,
+        magazine1: r.magazine_1,
+        magazine2: r.magazine_2,
+        leftTrait1: r.left_trait_1,
+        leftTrait2: r.left_trait_2,
+        leftTrait3: r.left_trait_3,
+        rightTrait1: r.right_trait_1,
+        rightTrait2: r.right_trait_2,
+        rightTrait3: r.right_trait_3,
+        masterwork: r.masterwork,
+        createdAt: r.created_at,
+      }));
     }),
 
   myRecentRolls: authenticatedProcedure
