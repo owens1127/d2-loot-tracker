@@ -61,7 +61,9 @@ export const Header = () => {
               disabled={session.status === "pending"}
             >
               <a
-                href={session.status === "pending" ? "/" : "/api/auth/bungie"}
+                href={
+                  session.status === "pending" ? "/" : "/api/auth/authorize"
+                }
                 className={
                   session.status === "pending"
                     ? "opacity-50 cursor-not-allowed"
