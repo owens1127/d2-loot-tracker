@@ -41,30 +41,33 @@ export function DestinyItemCard({
     <div className="flex flex-col items-center space-y-2">
       <span className="text-sm font-medium text-zinc-400">{label}</span>
       <div className="flex flex-col space-y-2">
-        {perks.map((perk) => (
-          <TooltipProvider key={perk}>
-            <Tooltip delayDuration={100}>
-              <TooltipTrigger asChild>
-                <Image
-                  src={`https://www.bungie.net${defs[perk].displayProperties.icon}`}
-                  width={40}
-                  height={40}
-                  alt={defs[perk].displayProperties.name}
-                  className="rounded-md cursor-pointer"
-                  unoptimized
-                />
-              </TooltipTrigger>
-              <TooltipContent side="right">
-                <p className="font-semibold">
-                  {defs[perk].displayProperties.name}
-                </p>
-                <p className="text-sm">
-                  {defs[perk].displayProperties.description}
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        ))}
+        {perks.map(
+          (perk) =>
+            defs[perk] && (
+              <TooltipProvider key={perk}>
+                <Tooltip delayDuration={100}>
+                  <TooltipTrigger asChild>
+                    <Image
+                      src={`https://www.bungie.net${defs[perk].displayProperties.icon}`}
+                      width={40}
+                      height={40}
+                      alt={defs[perk].displayProperties.name}
+                      className="rounded-md cursor-pointer"
+                      unoptimized
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <p className="font-semibold">
+                      {defs[perk].displayProperties.name}
+                    </p>
+                    <p className="text-sm">
+                      {defs[perk].displayProperties.description}
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )
+        )}
       </div>
     </div>
   );

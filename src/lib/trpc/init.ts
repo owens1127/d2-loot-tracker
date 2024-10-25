@@ -3,10 +3,12 @@ import { cache } from "react";
 import { getRefreshedServerSession } from "@/app/api/auth";
 import { prisma } from "@/lib/prisma";
 import SuperJSON from "superjson";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export const createTRPCContext = cache(async () => {
   return {
+    headers: headers(),
+    cookies: cookies(),
     prisma: prisma,
   };
 });
@@ -31,9 +33,8 @@ export const baseProcedure = t.procedure.use(async ({ ctx, next }) => {
   const res = await next({ ctx });
 
   if (!res.ok) {
-    console.error(res.error);
     try {
-      await fetch(process.env.DISCORD_WEBHOOK_URL!, {
+      const discordResponse = await fetch(process.env.DISCORD_WEBHOOK_URL!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,16 +45,24 @@ export const baseProcedure = t.procedure.use(async ({ ctx, next }) => {
             JSON.stringify(
               {
                 error: res.error,
-                errorCause: res.error.cause,
-                headers: Array.from(headers()),
+                cause: res.error?.cause?.message,
+                headers: Array.from(ctx.headers.keys()),
               },
               null,
               2
-            ) +
+            ).substring(0, 1000) +
             "```",
         }),
       });
-    } catch {}
+
+      if (discordResponse.ok) {
+        throw new Error("Failed to send error to Discord", {
+          cause: discordResponse,
+        });
+      }
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return res;

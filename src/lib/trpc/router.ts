@@ -229,8 +229,9 @@ export const appRouter = createTRPCRouter({
         .filter(
           (r) =>
             !(r.reason instanceof PrismaClientKnownRequestError) ||
-            r.reason.message !==
-              "SQLITE_CONSTRAINT: SQLite error: UNIQUE constraint failed: weapon_rolls.item_instance_id"
+            !r.reason.message.includes(
+              "UNIQUE constraint failed: weapon_rolls.item_instance_id"
+            )
         );
 
       if (errs.length) {
