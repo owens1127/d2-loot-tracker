@@ -31,6 +31,7 @@ export const baseProcedure = t.procedure.use(async ({ ctx, next }) => {
   const res = await next({ ctx });
 
   if (!res.ok) {
+    console.error(res.error);
     try {
       await fetch(process.env.DISCORD_WEBHOOK_URL!, {
         method: "POST",

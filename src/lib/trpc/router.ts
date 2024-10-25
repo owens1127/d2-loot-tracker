@@ -4,8 +4,11 @@ import {
   baseProcedure,
   createTRPCRouter,
 } from "./init";
-import { perkCountsForActiveWeapons, insertRoll } from "@prisma/client/sql";
+import { perkCountsForActiveWeapons } from "@prisma/client/sql";
 import traitsToEnhanced from "@/lib/bungie/trait-to-enhanced-trait.json";
+import { WeaponRoll } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { TRPCError } from "@trpc/server";
 
 const enhancedTraits = new Set(Object.values(traitsToEnhanced));
 
@@ -198,46 +201,52 @@ export const appRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       // Prisma does not support avoiding duplicates on insertMany
-      const result = await ctx.prisma.$transaction(
+      const result = await Promise.allSettled(
         input.items.map((item) =>
-          ctx.prisma.$queryRawTyped(
-            insertRoll(
-              item.itemHash,
-              input.destinyMembershipId,
-              item.itemInstanceId,
-              item.barrels[0],
-              item.barrels[1],
-              item.magazines[0],
-              item.magazines[1],
-              item.leftPerks[0],
-              item.leftPerks[1],
-              item.leftPerks[2],
-              item.rightPerks[0],
-              item.rightPerks[1],
-              item.rightPerks[2],
-              item.masterwork
-            )
-          )
+          ctx.prisma.weaponRoll.create({
+            data: {
+              destinyMembershipId: input.destinyMembershipId,
+              itemInstanceId: item.itemInstanceId,
+              weaponHash: item.itemHash,
+              barrel1: item.barrels[0],
+              barrel2: item.barrels[1],
+              magazine1: item.magazines[0],
+              magazine2: item.magazines[1],
+              leftTrait1: item.leftPerks[0],
+              leftTrait2: item.leftPerks[1],
+              leftTrait3: item.leftPerks[2],
+              rightTrait1: item.rightPerks[0],
+              rightTrait2: item.rightPerks[1],
+              rightTrait3: item.rightPerks[2],
+              masterwork: item.masterwork,
+            },
+          })
         )
       );
 
-      return result.flat().map((r) => ({
-        itemInstanceId: r.item_instance_id,
-        destinyMembershipId: r.destiny_membership_id,
-        weaponHash: r.weapon_hash,
-        barrel1: r.barrel_1,
-        barrel2: r.barrel_2,
-        magazine1: r.magazine_1,
-        magazine2: r.magazine_2,
-        leftTrait1: r.left_trait_1,
-        leftTrait2: r.left_trait_2,
-        leftTrait3: r.left_trait_3,
-        rightTrait1: r.right_trait_1,
-        rightTrait2: r.right_trait_2,
-        rightTrait3: r.right_trait_3,
-        masterwork: r.masterwork,
-        createdAt: r.created_at,
-      }));
+      const errs = result
+        .filter((r): r is PromiseRejectedResult => r.status === "rejected")
+        .filter(
+          (r) =>
+            !(r.reason instanceof PrismaClientKnownRequestError) ||
+            r.reason.message !==
+              "SQLITE_CONSTRAINT: SQLite error: UNIQUE constraint failed: weapon_rolls.item_instance_id"
+        );
+
+      if (errs.length) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to insert some items",
+          cause: errs.map((e) => e.reason),
+        });
+      }
+
+      return result
+        .filter(
+          (r): r is PromiseFulfilledResult<WeaponRoll> =>
+            r.status === "fulfilled"
+        )
+        .map((r) => r.value);
     }),
 
   myRecentRolls: authenticatedProcedure
