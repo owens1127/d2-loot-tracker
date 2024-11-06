@@ -6,6 +6,9 @@ export default async function Page() {
 
   return (
     <main>
+      <h1 className="text-2xl font-bold my-4 text-center">
+        Perk totals since the patch
+      </h1>
       <PerkStatsTable perkStats={perkStats} />
     </main>
   );

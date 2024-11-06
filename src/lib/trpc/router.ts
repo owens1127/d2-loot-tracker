@@ -45,6 +45,9 @@ export const appRouter = createTRPCRouter({
         weaponHash: true,
       },
       where: {
+        createdAt: {
+          gt: new Date("2024-11-05T17:00:00.000Z"),
+        },
         activeHash: {
           isNot: null,
         },
