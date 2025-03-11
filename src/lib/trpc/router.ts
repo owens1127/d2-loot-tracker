@@ -46,7 +46,7 @@ export const appRouter = createTRPCRouter({
       },
       where: {
         createdAt: {
-          gt: new Date("2024-11-05T17:00:00.000Z"),
+          gt: new Date("2025-03-11T17:00:00.000Z"),
         },
         activeHash: {
           isNot: null,

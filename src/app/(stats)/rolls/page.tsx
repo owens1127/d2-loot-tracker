@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <main>
       <h1 className="text-2xl font-bold my-4 text-center">
-        Roll combinations since the patch
+        {`Roll combinations since ${new Date("2025-03-11T17:00:00.000Z").toLocaleDateString()}`}
       </h1>
       <div className="flex flex-wrap align-top gap-8 text-white p-4 rounded-md mx-auto">
         {commonPerkRolls.map((weapon) => (

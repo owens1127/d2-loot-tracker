@@ -2,7 +2,7 @@ WITH weps AS (
     SELECT * 
     FROM weapon_rolls
     WHERE weapon_hash IN (SELECT weapon_hash FROM active_hashes)
-        AND created_at > '2024-11-05T17:00:00.000Z'
+        AND created_at > '2025-03-11T17:00:00.000Z'
 ),
 unwrapped_barrels AS (
     SELECT weapon_hash, barrel_1 AS barrel FROM weps
